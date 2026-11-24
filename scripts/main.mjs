@@ -96,7 +96,7 @@ Hooks.once('init', () => {
 
 Hooks.once('setup', () => registerFrameGear());
 
-/** Beast Feast replaces rest downtime with Make a Feast: hide the character sheet's rest buttons. */
+/** Beast Feast replaces rest downtime with Make a Feast: hide the rest buttons on character and party sheets. */
 function toggleRestButtons(hidden = game.settings.get(MODULE_ID, 'hideRestButtons')) {
     document.body.classList.toggle('dh-hotpot-no-rest', !!hidden);
 }
