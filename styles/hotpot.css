@@ -1158,6 +1158,8 @@
   z-index: 2;
   width: min(92%, 380px);
   aspect-ratio: 1024 / 930;
+  /* the painted pot's body sits ~4.5% right of the image center; pull it back over the fire */
+  translate: -4.5% 0;
   transition: transform 0.2s, filter 0.5s;
 }
 .dh-hotpot .hp-pot.hp-drag-over .hp-potart { transform: scale(1.04); }
