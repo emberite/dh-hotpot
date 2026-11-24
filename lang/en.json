@@ -195,7 +195,9 @@
       "Saved": "{name} saved to the larder.",
       "SavedAll": "{n} ingredients saved to the larder.",
       "Given": "{name} → {actor}",
-      "Yields": "Yields: {list}"
+      "Yields": "Yields: {list}",
+      "HarvestOne": "Harvest 1 ingredient",
+      "YieldOne": "ingredient"
     },
     "Larder": {
       "Name": "Beast Feast Larder",

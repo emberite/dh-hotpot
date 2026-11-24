@@ -26,7 +26,7 @@
             <span>{{beastTier}}{{#if beast.type}} · {{beast.type}}{{/if}} · {{localize "DHHOTPOT.Forge.HP" n=beast.hp}}</span>
             {{#if beastYields}}<span class="hp-beast-yields"><i class="fa-solid fa-drumstick-bite"></i> {{localize "DHHOTPOT.Forge.Yields" list=beastYields}}</span>{{/if}}
           </div>
-          <div class="hp-yield" data-tooltip="{{localize "DHHOTPOT.Forge.HPGuide"}}"><b>{{beast.count}}</b><small>{{localize "DHHOTPOT.Forge.Yield"}}</small></div>
+          <div class="hp-yield" data-tooltip="{{localize "DHHOTPOT.Forge.HPGuide"}}"><b>{{beast.count}}</b><small>{{#if beastSingle}}{{localize "DHHOTPOT.Forge.YieldOne"}}{{else}}{{localize "DHHOTPOT.Forge.Yield"}}{{/if}}</small></div>
           <button type="button" class="hp-icon-btn" data-action="clearBeast"><i class="fa-solid fa-xmark"></i></button>
           {{else}}
           <i class="fa-solid fa-paw hp-drop-icon"></i>
@@ -39,7 +39,7 @@
         </select>
         <p class="hp-hint">{{localize "DHHOTPOT.Forge.HPGuide"}}</p>
         <button type="button" class="hp-big-btn" data-action="generateBeast" {{#unless beast}}disabled{{/unless}}>
-          <i class="fa-solid fa-utensils"></i> {{#if beast}}{{localize "DHHOTPOT.Forge.Harvest" n=beast.count}}{{else}}{{localize "DHHOTPOT.Forge.HarvestNone"}}{{/if}}
+          <i class="fa-solid fa-utensils"></i> {{#if beast}}{{#if beastSingle}}{{localize "DHHOTPOT.Forge.HarvestOne"}}{{else}}{{localize "DHHOTPOT.Forge.Harvest" n=beast.count}}{{/if}}{{else}}{{localize "DHHOTPOT.Forge.HarvestNone"}}{{/if}}
         </button>
         {{/if}}
 

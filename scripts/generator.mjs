@@ -227,6 +227,7 @@ export class IngredientForge extends HandlebarsApplicationMixin(ApplicationV2) {
             mode: { [this.mode]: true },
             beast: this.beast,
             beastTier: this.beast ? L('Forge.Tier', { n: this.beast.tier }) : '',
+            beastSingle: this.beast?.count === 1,
             beastYields: this.beast?.harvest?.length ? [...new Set(this.beast.harvest.map(h => h.name))].join(', ') : '',
             adversaries,
             bloomRoll: this.bloomRoll,

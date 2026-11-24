@@ -67,6 +67,11 @@ Open it from the **Beast Feast** section of the Daggerheart sidebar menu.
 - **Editing:** every result can be edited (flavors, name, property, image) and saved to a **larder**, which is a world compendium or an Items folder.
 - **Handing out:** give servings to any character or the party stash with one click. Matching ingredients stack.
 
+| | | |
+|---|---|---|
+| ![Harvesting a Dumpling Toad in the Ingredient Generator](docs/screenshots/09-forge-beast.webp) | ![Rolling the Hope Die on the bloom table](docs/screenshots/10-forge-bloom.webp) | ![A blank custom ingredient](docs/screenshots/11-forge-custom.webp) |
+| **Beast:** a Dumpling Toad yields Dumpling Skin. | **Bloom:** a 1 on the Hope Die gives a Sweet bloom. | **Custom:** set every flavor yourself. |
+
 ### Beast Feast equipment
 
 While the setting is on (the default):
