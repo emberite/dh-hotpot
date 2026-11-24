@@ -1,0 +1,159 @@
+<div class="hp-root hp-forge-root">
+  <div class="hp-forge">
+    {{!-- ============ FORGE ============ --}}
+    <section class="hp-panel hp-forge-left">
+      <h2><i class="fa-solid fa-drumstick-bite"></i> {{localize "DHHOTPOT.Forge.Heading"}}</h2>
+
+      <nav class="hp-modes">
+        <button type="button" class="{{#if mode.beast}}active{{/if}}" data-action="mode" data-mode="beast">
+          <i class="fa-solid fa-paw"></i><span>{{localize "DHHOTPOT.Forge.Mode.beast"}}</span><small>{{localize "DHHOTPOT.Forge.Mode.beastHint"}}</small>
+        </button>
+        <button type="button" class="{{#if mode.bloom}}active{{/if}}" data-action="mode" data-mode="bloom">
+          <i class="fa-solid fa-seedling"></i><span>{{localize "DHHOTPOT.Forge.Mode.bloom"}}</span><small>{{localize "DHHOTPOT.Forge.Mode.bloomHint"}}</small>
+        </button>
+        <button type="button" class="{{#if mode.custom}}active{{/if}}" data-action="mode" data-mode="custom">
+          <i class="fa-solid fa-pen-nib"></i><span>{{localize "DHHOTPOT.Forge.Mode.custom"}}</span><small>{{localize "DHHOTPOT.Forge.Mode.customHint"}}</small>
+        </button>
+      </nav>
+
+      <div class="hp-source">
+        {{#if mode.beast}}
+        <div class="hp-beast-drop {{#if beast}}has-beast{{/if}}">
+          {{#if beast}}
+          <img src="{{beast.img}}" alt="">
+          <div class="hp-beast-info">
+            <strong>{{beast.name}}</strong>
+            <span>{{beastTier}}{{#if beast.type}} · {{beast.type}}{{/if}} · {{localize "DHHOTPOT.Forge.HP" n=beast.hp}}</span>
+            {{#if beastYields}}<span class="hp-beast-yields"><i class="fa-solid fa-drumstick-bite"></i> {{localize "DHHOTPOT.Forge.Yields" list=beastYields}}</span>{{/if}}
+          </div>
+          <div class="hp-yield" data-tooltip="{{localize "DHHOTPOT.Forge.HPGuide"}}"><b>{{beast.count}}</b><small>{{localize "DHHOTPOT.Forge.Yield"}}</small></div>
+          <button type="button" class="hp-icon-btn" data-action="clearBeast"><i class="fa-solid fa-xmark"></i></button>
+          {{else}}
+          <i class="fa-solid fa-paw hp-drop-icon"></i>
+          <span class="hp-drop-text">{{localize "DHHOTPOT.Forge.DropBeast"}}</span>
+          {{/if}}
+        </div>
+        <select data-adversary-select>
+          <option value="">{{localize "DHHOTPOT.Forge.PickBeast"}}</option>
+          {{#each adversaries}}<option value="{{uuid}}" {{#if selected}}selected{{/if}}>{{name}}</option>{{/each}}
+        </select>
+        <p class="hp-hint">{{localize "DHHOTPOT.Forge.HPGuide"}}</p>
+        <button type="button" class="hp-big-btn" data-action="generateBeast" {{#unless beast}}disabled{{/unless}}>
+          <i class="fa-solid fa-utensils"></i> {{#if beast}}{{localize "DHHOTPOT.Forge.Harvest" n=beast.count}}{{else}}{{localize "DHHOTPOT.Forge.HarvestNone"}}{{/if}}
+        </button>
+        {{/if}}
+
+        {{#if mode.bloom}}
+        <div class="hp-bloom">
+          <div class="hp-bloom-die {{#if bloomRoll}}rolled{{/if}}">{{{bloomDie}}}</div>
+          <ol class="hp-bloom-table">
+            {{#each bloomTable}}<li class="{{#if hit}}hit{{/if}}" style="--c: {{color}}"><b>{{range}}</b><span>{{label}} (1)</span></li>{{/each}}
+          </ol>
+        </div>
+        <p class="hp-hint">{{localize "DHHOTPOT.Forge.BloomHint"}}</p>
+        <button type="button" class="hp-big-btn" data-action="rollBloom"><i class="fa-solid fa-dice-d12"></i> {{localize "DHHOTPOT.Forge.RollBloom"}}</button>
+        {{/if}}
+
+        {{#if mode.custom}}
+        <p class="hp-hint">{{localize "DHHOTPOT.Forge.CustomHint"}}</p>
+        <button type="button" class="hp-big-btn" data-action="newCustom"><i class="fa-solid fa-plus"></i> {{localize "DHHOTPOT.Forge.NewCustom"}}</button>
+        {{/if}}
+      </div>
+
+      <h3>
+        <i class="fa-solid fa-layer-group"></i> {{localize "DHHOTPOT.Forge.Drafts"}}
+        {{#if unsavedCount}}<button type="button" class="hp-btn small hp-saveall" data-action="saveAll"><i class="fa-solid fa-box-archive"></i> {{localize "DHHOTPOT.Forge.SaveAll"}}</button>{{/if}}
+      </h3>
+      <div class="hp-drafts">
+        {{#each drafts}}
+        <article class="hp-draft" data-draft-key="{{key}}">
+          <button type="button" class="hp-draft-img" data-action="pickImage" data-tooltip="{{localize "DHHOTPOT.Forge.PickImage"}}">
+            <img src="{{img}}" alt=""><i class="fa-solid fa-image"></i>
+          </button>
+          <div class="hp-draft-body">
+            <div class="hp-draft-row">
+              <input type="text" class="hp-draft-name" data-draft-field="name" value="{{name}}" placeholder="{{localize "DHHOTPOT.Forge.NamePlaceholder"}}">
+              <button type="button" class="hp-icon-btn" data-action="rerollName" data-tooltip="{{localize "DHHOTPOT.Forge.RerollName"}}"><i class="fa-solid fa-dice"></i></button>
+              <button type="button" class="hp-icon-btn danger" data-action="discardDraft" data-tooltip="{{localize "DHHOTPOT.Forge.Discard"}}"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="hp-flavor-steppers">
+              {{#each steppers}}
+              <button type="button" class="hp-fstep {{#if on}}on{{/if}}" data-action="flavor" data-flavor="{{key}}" style="--c: {{color}}"
+                data-tooltip="{{label}} · {{localize "DHHOTPOT.Forge.FlavorHint"}}">{{{die}}}</button>
+              {{/each}}
+              <span class="hp-dice-total">{{dice}}</span>
+              <button type="button" class="hp-icon-btn" data-action="rerollProfile" data-tooltip="{{localize "DHHOTPOT.Forge.RerollProfile"}}"><i class="fa-solid fa-shuffle"></i></button>
+            </div>
+            <div class="hp-draft-row">
+              <input type="text" data-draft-field="description" value="{{description}}" placeholder="{{localize "DHHOTPOT.Forge.PropertyPlaceholder"}}">
+              <button type="button" class="hp-icon-btn" data-action="rerollProperty" data-tooltip="{{localize "DHHOTPOT.Forge.RerollProperty"}}"><i class="fa-solid fa-wand-sparkles"></i></button>
+            </div>
+            <div class="hp-draft-actions">
+              <button type="button" class="hp-btn small" data-action="saveDraft"><i class="fa-solid fa-box-archive"></i> {{localize "DHHOTPOT.Forge.Save"}}</button>
+              <span class="hp-give-label">{{localize "DHHOTPOT.Larder.Give"}}</span>
+              {{#each @root.recipients}}
+              <button type="button" class="hp-give-avatar" data-action="giveDraft" data-actor-id="{{id}}" data-tooltip="{{localize "DHHOTPOT.Larder.GiveTo" name=name}}">
+                <img src="{{img}}" alt=""><i class="fa-solid fa-plus"></i>
+              </button>
+              {{/each}}
+            </div>
+          </div>
+        </article>
+        {{else}}
+        <div class="hp-empty small">
+          {{#if emptyArt.length}}<div class="hp-empty-art">{{#each emptyArt}}<img src="{{this}}" alt="" style="--i: {{@index}}">{{/each}}</div>
+          {{else}}<i class="fa-solid fa-drumstick-bite"></i><br>{{/if}}
+          {{localize "DHHOTPOT.Forge.NoDrafts"}}
+        </div>
+        {{/each}}
+      </div>
+    </section>
+
+    {{!-- ============ LARDER ============ --}}
+    <section class="hp-panel hp-forge-right">
+      <h2><i class="fa-solid fa-box-archive"></i> {{localize "DHHOTPOT.Larder.Title"}} <span class="hp-count">{{larderCount}}</span></h2>
+      <p class="hp-hint hp-larder-where">
+        {{larderLabel}}
+        <button type="button" class="hp-link" data-action="openLarder"><i class="fa-solid fa-arrow-up-right-from-square"></i> {{localize "DHHOTPOT.Larder.Open"}}</button>
+      </p>
+
+      <div class="hp-recipients">
+        {{#each recipients}}
+        <div class="hp-recipient {{#if carry.over}}over{{/if}}" data-actor-id="{{id}}"
+          data-tooltip="{{#if carry.max}}{{localize "DHHOTPOT.Pantry.Carry" count=carry.count max=carry.max}}{{else}}{{name}}{{/if}}">
+          <img src="{{img}}" alt="">
+          <span>{{name}}</span>
+          <small><i class="fa-solid fa-sack"></i> {{carry.count}}{{#if carry.max}}/{{carry.max}}{{/if}}</small>
+        </div>
+        {{/each}}
+      </div>
+
+      <input type="search" class="hp-larder-search" data-larder-search value="{{filter}}" placeholder="{{localize "DHHOTPOT.Larder.Search"}}">
+
+      <div class="hp-larder-list">
+        {{#each larder}}
+        <div class="hp-larder-item" draggable="true" data-larder-uuid="{{uuid}}">
+          <img src="{{img}}" alt="" data-action="openItem" data-tooltip="{{localize "DHHOTPOT.Larder.OpenItem"}}">
+          <div class="hp-larder-body">
+            <span class="hp-ing-name">{{name}}</span>
+            <div class="hp-chips">
+              {{#each chips}}<span class="hp-chip" style="--c: {{color}}" data-tooltip="{{label}} ({{n}})"><span class="hp-chip-die">{{{die}}}</span>×{{n}}</span>{{/each}}
+            </div>
+            {{#if description}}<small class="hp-larder-desc">{{description}}</small>{{/if}}
+          </div>
+          <div class="hp-give-row">
+            {{#each @root.recipients}}
+            <button type="button" class="hp-give-avatar" data-action="give" data-actor-id="{{id}}" data-tooltip="{{localize "DHHOTPOT.Larder.GiveTo" name=name}}">
+              <img src="{{img}}" alt=""><i class="fa-solid fa-plus"></i>
+            </button>
+            {{/each}}
+          </div>
+          <button type="button" class="hp-icon-btn danger" data-action="deleteItem" data-tooltip="{{localize "DHHOTPOT.Larder.DeleteTitle"}}"><i class="fa-solid fa-trash"></i></button>
+        </div>
+        {{else}}
+        <p class="hp-empty"><i class="fa-solid fa-box-open"></i><br>{{localize "DHHOTPOT.Larder.Empty"}}</p>
+        {{/each}}
+      </div>
+    </section>
+  </div>
+</div>

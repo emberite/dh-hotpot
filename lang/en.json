@@ -1,0 +1,260 @@
+{
+  "DHHOTPOT": {
+    "Title": "The Hotpot",
+    "MakeAFeast": "Make a Feast",
+    "DefaultName": "Mystery Stew",
+    "ChatSpeaker": "The Hotpot",
+    "Tabs": {
+      "kitchen": "Kitchen",
+      "cookbook": "Cookbook"
+    },
+    "Step": {
+      "prep": "Prep",
+      "cooking": "Cook",
+      "serving": "Serve",
+      "done": "Feast!"
+    },
+    "Flavor": {
+      "sweet": "Sweet",
+      "salty": "Salty",
+      "bitter": "Bitter",
+      "sour": "Sour",
+      "savory": "Savory",
+      "weird": "Weird"
+    },
+    "Pantry": {
+      "Title": "Pantry",
+      "Hint": "Click or drag ingredients into the pot. Ingredients from the sidebar or a compendium also work and aren't used up.",
+      "Empty": "Nobody is carrying any ingredients. Hunt some beasts or gather blooms!",
+      "PartyStash": "Party stash",
+      "Carry": "Carrying {count} of {max}",
+      "Over": "Over the carry limit (highest trait)",
+      "NoParty": "No active party, so all player characters are shown."
+    },
+    "Pot": {
+      "Title": "The Pot",
+      "DropHere": "Drop ingredients here",
+      "Empty": "Empty pot",
+      "FlavorDice": "Flavor dice",
+      "Tokens": "Familiarity tokens",
+      "Bland": "No flavor",
+      "OneDie": "A single die can't match. This meal would be done immediately with a rating of 0."
+    },
+    "Recipe": {
+      "Title": "Recipe card",
+      "Name": "Dish name",
+      "NamePlaceholder": "Name your dish…",
+      "Description": "Description",
+      "DescriptionPlaceholder": "How do you prepare it? What does it smell like?",
+      "Diners": "Who's eating?",
+      "Tier": "Party tier",
+      "Familiar": "Familiar flavor! This matches \"{name}\" in your cookbook.",
+      "FamiliarTokens": "+{n} tokens you can discard instead of a die.",
+      "Features": "Special ingredients",
+      "Start": "Start cooking",
+      "StartHint": "Ingredients are removed from inventories."
+    },
+    "Cook": {
+      "Roll": "Roll the pot",
+      "Rolling": "Bubbling…",
+      "Auto": "Cook it all",
+      "AutoHint": "Roll until done, discarding automatically (tokens first, then the biggest die).",
+      "Pick": "No matches! Pick a die to discard, then roll again.",
+      "PickToken": "or spend a token",
+      "Tray": "On the stove",
+      "Plate": "Matched sets",
+      "PlateEmpty": "Matching dice land here.",
+      "Rating": "Meal Rating",
+      "Round": "Round {n}",
+      "Left": "Dice left: {n}",
+      "Done": "The meal is ready!",
+      "Serve": "Plate it up",
+      "Discarded": "Discarded",
+      "LastDrop": "Last Drop",
+      "Abandon": "Abandon"
+    },
+    "Serve": {
+      "Title": "Serve the feast",
+      "Hint": "Every diner gets the full Meal Rating to split between clearing Hit Points, clearing Stress and gaining Hope.",
+      "Left": "{n} left",
+      "Auto": "Auto",
+      "Go": "Serve!",
+      "NoDiners": "Nobody is eating. Go back and pick diners next time.",
+      "Spicy": "Spicy! A set matched on 8 or higher, so this dish can't clear Stress.",
+      "Risky": "Risky: no matches! Every diner clears all Hit Points and Stress and gains 3 Hope.",
+      "Death": "Risky: the dice matched. The Meal Rating is 0 and every diner must make a death move.",
+      "Speed": "Built for Speed: every diner gets +1 Agility until their next short rest."
+    },
+    "Done": {
+      "Title": "Bon appétit!",
+      "Again": "Cook another feast",
+      "Saved": "Recorded in the cookbook.",
+      "FullClear": "Fully restored"
+    },
+    "Res": {
+      "hp": "Hit Points",
+      "stress": "Stress",
+      "hope": "Hope"
+    },
+    "Cookbook": {
+      "Title": "The party cookbook",
+      "Empty": "No recipes yet. Your first feast will be written here.",
+      "Times": "Flavor cooked {n}×",
+      "Rating": "Rating",
+      "DeleteTitle": "Tear out recipe",
+      "DeleteBody": "Remove this recipe from the cookbook?",
+      "Hint": "Cooking a dish with the same flavor profile as a recipe in here adds tokens equal to the party's tier.",
+      "CookAgain": "Cook again",
+      "CookAgainHint": "Put the same ingredients in the pot. Familiar flavor gives tokens!",
+      "Missing": "Missing: {names}",
+      "Busy": "Finish the current meal first.",
+      "Loaded": "{name} is back in the pot."
+    },
+    "Feature": {
+      "lastDrop": {
+        "name": "Last Drop",
+        "hint": "When one die remains, roll it and add it to the Meal Rating.",
+        "rolled": "Last Drop! The final die adds {value} to the Meal Rating."
+      },
+      "risky": {
+        "name": "Risky",
+        "hint": "No matches at all: clear all HP and Stress, gain 3 Hope. Any match: Meal Rating 0 and a death move."
+      },
+      "spicy": {
+        "name": "Spicy",
+        "hint": "If dice match on 8 or higher, this dish can't clear Stress."
+      },
+      "builtForSpeed": {
+        "name": "Built for Speed",
+        "hint": "+1 Agility until your next short rest."
+      }
+    },
+    "Log": {
+      "Matched": "Matched {values}!",
+      "NoMatch": "No matches…",
+      "Token": "No matches, spent a token.",
+      "Discarded": "No matches, discarded a {die} ({value})."
+    },
+    "Confirm": {
+      "Title": "Into the pot?",
+      "Body": "These ingredients will be removed from inventories:",
+      "Nothing": "None. Everything in the pot came from outside anyone's inventory."
+    },
+    "Abandon": {
+      "Title": "Abandon the meal?",
+      "Body": "The ingredients are already used. Abandoning throws the meal away."
+    },
+    "Errors": {
+      "NoGM": "A GM needs to be online to cook with other characters' ingredients.",
+      "Timeout": "The GM didn't respond in time.",
+      "NotIngredient": "{name} isn't an ingredient."
+    },
+    "Menu": {
+      "Legend": "Beast Feast",
+      "Forge": "Ingredient Generator",
+      "Kitchen": "Make a Feast"
+    },
+    "Forge": {
+      "Title": "Ingredient Generator",
+      "Heading": "Forge",
+      "Mode": {
+        "beast": "Beast",
+        "beastHint": "Harvest an adversary",
+        "bloom": "Bloom",
+        "bloomHint": "Roll the Hope Die",
+        "custom": "Custom",
+        "customHint": "From scratch"
+      },
+      "DropBeast": "Drag an adversary here, or pick one below.",
+      "PickBeast": "Choose an adversary…",
+      "NotAdversary": "That isn't an adversary.",
+      "Tier": "Tier {n}",
+      "HP": "{n} HP",
+      "Yield": "ingredients",
+      "HPGuide": "Max HP sets the harvest: 4 or less → 1, 5–7 → 2, 8–10 → 3, 12+ → 4. Stronger beasts lean toward bigger dice.",
+      "Harvest": "Harvest {n} ingredients",
+      "HarvestNone": "Pick a beast to harvest",
+      "BloomHint": "Once per rest, a PC can spend a Hope to gather a bloom: roll their Hope Die (d12) for its flavor.",
+      "RollBloom": "Roll the Hope Die",
+      "CustomHint": "Start from a blank ingredient and set every flavor yourself.",
+      "NewCustom": "New ingredient",
+      "Drafts": "Fresh ingredients",
+      "NoDrafts": "Harvested and gathered ingredients land here. Tweak them, then save them to the larder or hand them out.",
+      "SaveAll": "Save all",
+      "Save": "Save",
+      "Discard": "Discard",
+      "PickImage": "Choose an image",
+      "NamePlaceholder": "Ingredient name",
+      "PropertyPlaceholder": "Interesting property or feature…",
+      "RerollName": "New name",
+      "RerollProfile": "Random flavors",
+      "RerollProperty": "New property",
+      "FlavorHint": "click +1, right-click −1",
+      "MaxFlavors": "An ingredient has at most 3 flavors.",
+      "Unnamed": "Mystery Ingredient",
+      "Saved": "{name} saved to the larder.",
+      "SavedAll": "{n} ingredients saved to the larder.",
+      "Given": "{name} → {actor}",
+      "Yields": "Yields: {list}"
+    },
+    "Larder": {
+      "Name": "Beast Feast Larder",
+      "Title": "Larder",
+      "InCompendium": "Stored in the compendium \"{name}\".",
+      "InFolder": "Stored in the Items folder \"{name}\".",
+      "NotCreated": "The larder is created when you save your first ingredient.",
+      "Open": "Open",
+      "Search": "Search the larder…",
+      "Give": "Give to",
+      "GiveTo": "Give 1 to {name}",
+      "OpenItem": "Open item sheet (drag onto any sheet to give)",
+      "Empty": "The larder is empty. Harvest a beast or gather a bloom!",
+      "DeleteTitle": "Remove from larder",
+      "DeleteBody": "Remove {name} from the larder? Copies already given out stay where they are."
+    },
+    "Live": {
+      "Tag": "Live",
+      "Watching": "Watching {name} cook",
+      "Broadcasting": "Everyone at the table is watching this feast.",
+      "Leave": "Leave",
+      "Gather": "Call everyone to the pot",
+      "GatherHint": "Opens the kitchen for every player so they can watch you cook live.",
+      "Gathered": "The party gathers around the pot.",
+      "TheirMove": "{name} is at the stove. Watch the pot!",
+      "YourShare": "{name} is plating up. You can adjust your own character's share."
+    },
+    "Theme": {
+      "daggerheart-core": "Core",
+      "beast-feast": "Beast Feast",
+      "witherwild": "The Witherwild",
+      "five-banners": "Five Banners Burning",
+      "age-of-umbra": "The Age of Umbra",
+      "motherboard": "Motherboard",
+      "colossus": "Colossus of the Drylands"
+    },
+    "Settings": {
+      "LarderStorage": {
+        "Name": "Larder storage",
+        "Hint": "Where the Ingredient Generator keeps saved ingredients.",
+        "compendium": "World compendium",
+        "folder": "Items folder"
+      },
+      "Theme": {
+        "Name": "Kitchen theme",
+        "Hint": "Color theme from the Core Rulebook sheet themes. Auto follows the party sheet's theme.",
+        "Auto": "Auto (match party sheet)"
+      },
+      "DiceSoNice": {
+        "Name": "Roll flavor dice in 3D",
+        "Hint": "Use Dice So Nice (if active) for flavor dice, colored by flavor."
+      },
+      "BeastFeastGear": {
+        "Name": "Beast Feast equipment",
+        "Hint": "The compendium browser starts filtered to Beast Feast items (clear the Campaign Frame filter to see everything), and character creation suggests Beast Feast starting gear instead of the standard class gear."
+      }
+    },
+    "Gear": {
+      "FilterLabel": "Campaign Frame"
+    }
+  }
+}

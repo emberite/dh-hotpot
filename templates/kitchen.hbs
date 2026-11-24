@@ -1,0 +1,408 @@
+<div class="hp-root phase-{{phaseName}} {{#if watching}}hp-watching{{/if}}">
+  <header class="hp-topbar">
+    <nav class="hp-tabs">
+      <button type="button" class="{{#if tab.kitchen}}active{{/if}}" data-action="switchTab" data-tab="kitchen">
+        <i class="fa-solid fa-fire-burner"></i> {{localize "DHHOTPOT.Tabs.kitchen"}}
+      </button>
+      <button type="button" class="{{#if tab.cookbook}}active{{/if}}" data-action="switchTab" data-tab="cookbook">
+        <i class="fa-solid fa-book-open"></i> {{localize "DHHOTPOT.Tabs.cookbook"}}
+        <span class="hp-count">{{cookbook.length}}</span>
+      </button>
+    </nav>
+    {{#if tab.kitchen}}
+    <ol class="hp-steps">
+      {{#each steps}}
+      <li class="{{#if active}}active{{/if}} {{#if complete}}complete{{/if}}"><span><b>{{#if complete}}<i class="fa-solid fa-check"></i>{{else}}{{n}}{{/if}}</b></span>{{label}}</li>
+      {{/each}}
+    </ol>
+    {{/if}}
+  </header>
+
+  {{#if watching}}
+  <div class="hp-live-banner">
+    <span class="hp-live-dot"></span><strong>{{localize "DHHOTPOT.Live.Tag"}}</strong>
+    <span>{{localize "DHHOTPOT.Live.Watching" name=watching.name}}</span>
+    <button type="button" class="hp-btn small ghost" data-action="leaveWatch"><i class="fa-solid fa-door-open"></i> {{localize "DHHOTPOT.Live.Leave"}}</button>
+  </div>
+  {{else if live}}
+  <div class="hp-live-banner cook">
+    <span class="hp-live-dot"></span><strong>{{localize "DHHOTPOT.Live.Tag"}}</strong>
+    <span>{{localize "DHHOTPOT.Live.Broadcasting"}}</span>
+  </div>
+  {{/if}}
+
+  {{#if tab.kitchen}}
+
+  {{!-- ============ PREP ============ --}}
+  {{#if phase.prep}}
+  <div class="hp-prep">
+    <section class="hp-panel hp-pantry">
+      <h2><i class="fa-solid fa-basket-shopping"></i> {{localize "DHHOTPOT.Pantry.Title"}}</h2>
+      <p class="hp-hint">{{localize "DHHOTPOT.Pantry.Hint"}}</p>
+      {{#if noParty}}<p class="hp-note"><i class="fa-solid fa-circle-info"></i> {{localize "DHHOTPOT.Pantry.NoParty"}}</p>{{/if}}
+      <div class="hp-pantry-list">
+        {{#each sources}}
+        <div class="hp-source">
+          <header>
+            <img src="{{img}}" alt="">
+            <span class="hp-source-name">{{#if isParty}}<i class="fa-solid fa-sack-xmark"></i> {{localize "DHHOTPOT.Pantry.PartyStash"}}{{else}}{{name}}{{/if}}</span>
+            {{#if carry}}
+            <span class="hp-carry {{#if carry.over}}over{{/if}}" data-tooltip="{{#if carry.over}}{{localize "DHHOTPOT.Pantry.Over"}}{{else}}{{localize "DHHOTPOT.Pantry.Carry" count=carry.count max=carry.max}}{{/if}}">
+              <i class="fa-solid fa-sack"></i> {{carry.count}}/{{carry.max}}
+            </span>
+            {{/if}}
+          </header>
+          {{#each items}}
+          <div class="hp-ingredient {{#if empty}}empty{{/if}}" {{#unless empty}}draggable="true" data-action="addToPot"{{/unless}} data-drag-uuid="{{uuid}}" {{#if tooltip}}data-tooltip="{{tooltip}}"{{/if}}>
+            <img src="{{img}}" alt="">
+            <div class="hp-ing-body">
+              <span class="hp-ing-name">{{name}}{{#if hasFeature}} <i class="fa-solid fa-star hp-star"></i>{{/if}}</span>
+              <div class="hp-chips">
+                {{#each chips}}
+                <span class="hp-chip" style="--c: {{color}}" data-tooltip="{{label}} ({{n}})"><span class="hp-chip-die">{{{die}}}</span>×{{n}}</span>
+                {{else}}
+                <span class="hp-chip bland">{{localize "DHHOTPOT.Pot.Bland"}}</span>
+                {{/each}}
+              </div>
+            </div>
+            <span class="hp-qty">×{{avail}}</span>
+          </div>
+          {{/each}}
+        </div>
+        {{/each}}
+        {{#unless hasIngredients}}
+        <p class="hp-empty"><i class="fa-solid fa-drumstick-bite"></i><br>{{localize "DHHOTPOT.Pantry.Empty"}}</p>
+        {{/unless}}
+      </div>
+    </section>
+
+    <section class="hp-center">
+      <div class="hp-pot {{#if potEmpty}}empty{{/if}}" style="--broth: {{brothColor}}; --level: {{bubbleLevel}}%">
+        <div class="hp-steam"><span></span><span></span><span></span><span></span></div>
+        {{#if potArt}}
+        <div class="hp-potart">
+          <img class="hp-potart-img" src="{{potArt}}" alt="">
+          <div class="hp-potart-broth">
+            <span class="hp-potart-tint"></span>
+            <span class="hp-bubble"></span><span class="hp-bubble"></span><span class="hp-bubble"></span><span class="hp-bubble"></span>
+            <div class="hp-potart-floaters">
+              {{#each pot}}
+              <button type="button" class="hp-floater" style="--i: {{@index}}" data-action="removeFromPot" data-pot-key="{{key}}" data-tooltip="{{name}}">
+                <img src="{{img}}" alt="{{name}}">
+                <i class="fa-solid fa-xmark"></i>
+              </button>
+              {{/each}}
+            </div>
+          </div>
+          {{#if potEmpty}}<span class="hp-drop-hint"><i class="fa-solid fa-hand-point-down"></i> {{localize "DHHOTPOT.Pot.DropHere"}}</span>{{/if}}
+        </div>
+        {{else}}
+        <div class="hp-cauldron">
+          <div class="hp-rim"></div>
+          <div class="hp-broth">
+            <span class="hp-bubble"></span><span class="hp-bubble"></span><span class="hp-bubble"></span><span class="hp-bubble"></span>
+            {{#each pot}}
+            <button type="button" class="hp-floater" style="--i: {{@index}}" data-action="removeFromPot" data-pot-key="{{key}}" data-tooltip="{{name}}">
+              <img src="{{img}}" alt="{{name}}">
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+            {{/each}}
+          </div>
+          {{#if potEmpty}}<span class="hp-drop-hint"><i class="fa-solid fa-hand-point-down"></i> {{localize "DHHOTPOT.Pot.DropHere"}}</span>{{/if}}
+          <div class="hp-handle left"></div><div class="hp-handle right"></div>
+        </div>
+        {{/if}}
+        <div class="hp-fire"><span></span><span></span><span></span><span></span><span></span></div>
+      </div>
+
+      <div class="hp-panel hp-dice-preview">
+        <h3>
+          <i class="fa-solid fa-dice-d20"></i> {{localize "DHHOTPOT.Pot.FlavorDice"}}
+          <span class="hp-dice-total">{{#if totalDice}}{{diceSummary}}{{/if}}</span>
+          {{#unless potEmpty}}<button type="button" class="hp-link" data-action="emptyPot"><i class="fa-solid fa-trash-can"></i> {{localize "DHHOTPOT.Pot.Empty"}}</button>{{/unless}}
+        </h3>
+        <div class="hp-profile-bar">
+          {{#each profileBar}}<span style="width: {{pct}}%; --c: {{color}}" data-tooltip="{{label}} ×{{n}}"><em>{{label}} {{n}}</em></span>{{/each}}
+        </div>
+        <div class="hp-dice-row">
+          {{#each previewDice}}<span class="hp-die small" style="--i: {{@index}}">{{{html}}}</span>{{/each}}
+          {{#each tokens}}<span class="hp-die small token" data-tooltip="{{localize "DHHOTPOT.Pot.Tokens"}}">{{{this}}}</span>{{/each}}
+        </div>
+      </div>
+    </section>
+
+    <section class="hp-panel hp-recipe">
+      <h2><i class="fa-solid fa-scroll"></i> {{localize "DHHOTPOT.Recipe.Title"}}</h2>
+      <label class="hp-field">
+        <span>{{localize "DHHOTPOT.Recipe.Name"}}</span>
+        <input type="text" data-recipe-field="name" value="{{recipe.name}}" {{#if watching}}readonly{{/if}} placeholder="{{localize "DHHOTPOT.Recipe.NamePlaceholder"}}">
+      </label>
+      <label class="hp-field">
+        <span>{{localize "DHHOTPOT.Recipe.Description"}}</span>
+        <textarea rows="3" data-recipe-field="description" {{#if watching}}readonly{{/if}} placeholder="{{localize "DHHOTPOT.Recipe.DescriptionPlaceholder"}}">{{recipe.description}}</textarea>
+      </label>
+
+      <h3>{{localize "DHHOTPOT.Recipe.Diners"}}</h3>
+      <div class="hp-diner-picks">
+        {{#each diners}}
+        <button type="button" class="hp-avatar {{#if on}}on{{/if}}" data-action="toggleDiner" data-actor-id="{{id}}" data-tooltip="{{name}}">
+          <img src="{{img}}" alt="{{name}}"><i class="fa-solid fa-utensils"></i>
+        </button>
+        {{/each}}
+      </div>
+
+      <label class="hp-field inline">
+        <span>{{localize "DHHOTPOT.Recipe.Tier"}}</span>
+        <input type="number" min="1" max="4" step="1" data-tier value="{{tier}}" {{#if watching}}readonly{{/if}}>
+      </label>
+
+      {{#if familiar}}
+      <div class="hp-callout familiar">
+        <i class="fa-solid fa-book-bookmark"></i>
+        <div>
+          <strong>{{localize "DHHOTPOT.Recipe.Familiar" name=familiar.name}}</strong>
+          <span>{{localize "DHHOTPOT.Recipe.FamiliarTokens" n=tokensCount}}</span>
+        </div>
+      </div>
+      {{/if}}
+
+      {{#if features.length}}
+      <h3>{{localize "DHHOTPOT.Recipe.Features"}}</h3>
+      {{#each features}}
+      <div class="hp-feature feature-{{key}}"><i class="fa-solid fa-star"></i><div><strong>{{label}}</strong> {{hint}}</div></div>
+      {{/each}}
+      {{/if}}
+
+      {{#if oneDie}}<p class="hp-callout warn"><i class="fa-solid fa-triangle-exclamation"></i> {{localize "DHHOTPOT.Pot.OneDie"}}</p>{{/if}}
+
+      <div class="hp-spacer"></div>
+      {{#if watching}}
+      <p class="hp-callout watch"><i class="fa-solid fa-eye"></i> {{localize "DHHOTPOT.Live.TheirMove" name=watching.name}}</p>
+      {{else}}
+      {{#unless live}}
+      <button type="button" class="hp-btn hp-gather" data-action="gather" data-tooltip="{{localize "DHHOTPOT.Live.GatherHint"}}">
+        <i class="fa-solid fa-bullhorn"></i> {{localize "DHHOTPOT.Live.Gather"}}
+      </button>
+      {{/unless}}
+      {{/if}}
+      <button type="button" class="hp-big-btn" data-action="startCooking" {{#unless canCook}}disabled{{/unless}}>
+        <i class="fa-solid fa-fire-flame-curved"></i> {{localize "DHHOTPOT.Recipe.Start"}}
+      </button>
+      <p class="hp-hint center">{{localize "DHHOTPOT.Recipe.StartHint"}}</p>
+    </section>
+  </div>
+  {{/if}}
+
+  {{!-- ============ COOKING ============ --}}
+  {{#if phase.cooking}}
+  <div class="hp-cooking">
+    <section class="hp-panel hp-stove">
+      <header class="hp-stove-head">
+        <h2>{{recipe.name}}</h2>
+        <span class="hp-pill">{{localize "DHHOTPOT.Cook.Round" n=round}}</span>
+        <span class="hp-pill">{{localize "DHHOTPOT.Cook.Left" n=remainingCount}}</span>
+      </header>
+      <div class="hp-progress"><span style="width: {{progress}}%"></span></div>
+
+      <div class="hp-tray {{#if rolling}}rolling{{/if}} {{#if awaitingDiscard}}picking{{/if}}">
+        {{#each tray}}
+        <button type="button" class="hp-die {{#if @root.rolling}}rolling{{/if}} {{#if matched}}matched{{/if}} {{#if discarded}}discarded{{/if}} {{#if pickable}}pickable{{/if}} {{#if lastOne}}last-one{{/if}}"
+          data-faces="{{faces}}" style="--i: {{@index}}"
+          {{#if pickable}}data-action="discard" data-die-id="{{id}}"{{else}}tabindex="-1"{{/if}}>{{{html}}}</button>
+        {{/each}}
+      </div>
+
+      {{#if tokens.length}}
+      <div class="hp-tokens">
+        <span class="hp-hint">{{localize "DHHOTPOT.Pot.Tokens"}}</span>
+        {{#each tokens}}
+        <button type="button" class="hp-die token {{#if @root.awaitingDiscard}}pickable{{/if}}" {{#if @root.awaitingDiscard}}data-action="discard"{{else}}tabindex="-1"{{/if}}>{{{this}}}</button>
+        {{/each}}
+      </div>
+      {{/if}}
+
+      {{#if awaitingDiscard}}
+      <div class="hp-callout pick"><i class="fa-solid fa-hand-pointer"></i> {{localize "DHHOTPOT.Cook.Pick"}} {{#if hasTokens}}<em>({{localize "DHHOTPOT.Cook.PickToken"}})</em>{{/if}}</div>
+      {{/if}}
+      {{#if done}}
+      <div class="hp-callout done"><i class="fa-solid fa-bell-concierge"></i> {{localize "DHHOTPOT.Cook.Done"}}</div>
+      {{/if}}
+
+      {{#if watching}}
+      <p class="hp-callout watch"><i class="fa-solid fa-eye"></i> {{localize "DHHOTPOT.Live.TheirMove" name=watching.name}}</p>
+      {{/if}}
+      <div class="hp-controls">
+        {{#if done}}
+        <button type="button" class="hp-big-btn" data-action="toServing"><i class="fa-solid fa-plate-wheat"></i> {{localize "DHHOTPOT.Cook.Serve"}}</button>
+        {{else}}
+        <button type="button" class="hp-big-btn" data-action="roll" {{#unless canRoll}}disabled{{/unless}}>
+          <i class="fa-solid fa-dice {{#if rolling}}fa-shake{{/if}}"></i> {{#if rolling}}{{localize "DHHOTPOT.Cook.Rolling"}}{{else}}{{localize "DHHOTPOT.Cook.Roll"}}{{/if}}
+        </button>
+        <button type="button" class="hp-btn" data-action="autoCook" {{#unless canRoll}}disabled{{/unless}} data-tooltip="{{localize "DHHOTPOT.Cook.AutoHint"}}">
+          <i class="fa-solid fa-forward-fast"></i> {{localize "DHHOTPOT.Cook.Auto"}}
+        </button>
+        <button type="button" class="hp-btn ghost" data-action="reset"><i class="fa-solid fa-trash"></i> {{localize "DHHOTPOT.Cook.Abandon"}}</button>
+        {{/if}}
+      </div>
+
+      {{#if features.length}}
+      <div class="hp-feature-strip">
+        {{#each features}}<span class="hp-feature-tag" data-tooltip="{{hint}}"><i class="fa-solid fa-star"></i> {{label}}</span>{{/each}}
+      </div>
+      {{/if}}
+    </section>
+
+    <section class="hp-panel hp-plate">
+      <div class="hp-rating">
+        <span class="hp-rating-label">{{localize "DHHOTPOT.Cook.Rating"}}</span>
+        <span class="hp-rating-value">{{rating}}</span>
+        {{#if lastDrop}}<span class="hp-lastdrop">+{{lastDrop}} {{localize "DHHOTPOT.Cook.LastDrop"}}</span>{{/if}}
+      </div>
+      <h3><i class="fa-solid fa-plate-wheat"></i> {{localize "DHHOTPOT.Cook.Plate"}}</h3>
+      <div class="hp-sets">
+        {{#each sets}}
+        <div class="hp-set {{#if fresh}}fresh{{/if}}">
+          <div class="hp-set-dice">{{#each dice}}<span class="hp-die small">{{{this}}}</span>{{/each}}</div>
+          <span class="hp-set-value">+{{value}}</span>
+        </div>
+        {{else}}
+        <p class="hp-empty small">{{localize "DHHOTPOT.Cook.PlateEmpty"}}</p>
+        {{/each}}
+      </div>
+      {{#if discardedDice.length}}
+      <h3><i class="fa-solid fa-trash-can"></i> {{localize "DHHOTPOT.Cook.Discarded"}}</h3>
+      <div class="hp-discards">{{#each discardedDice}}<span class="hp-die tiny">{{{this}}}</span>{{/each}}</div>
+      {{/if}}
+      <ol class="hp-log">
+        {{#each log}}<li class="{{#if good}}good{{/if}}"><b>{{round}}</b> {{text}}</li>{{/each}}
+      </ol>
+    </section>
+  </div>
+  {{/if}}
+
+  {{!-- ============ SERVING ============ --}}
+  {{#if phase.serving}}
+  <div class="hp-serving">
+    <section class="hp-panel hp-serve-head">
+      <div class="hp-rating big">
+        <span class="hp-rating-label">{{localize "DHHOTPOT.Cook.Rating"}}</span>
+        <span class="hp-rating-value">{{rating}}</span>
+      </div>
+      <div class="hp-serve-info">
+        <h2>{{recipe.name}}</h2>
+        {{#if recipe.description}}<p class="hp-desc">{{recipe.description}}</p>{{/if}}
+        <p class="hp-hint">{{localize "DHHOTPOT.Serve.Hint"}}</p>
+        {{#if outcome.noStress}}<div class="hp-callout spicy"><i class="fa-solid fa-pepper-hot"></i> {{localize "DHHOTPOT.Serve.Spicy"}}</div>{{/if}}
+        {{#if outcome.fullClear}}<div class="hp-callout done"><i class="fa-solid fa-wand-magic-sparkles"></i> {{localize "DHHOTPOT.Serve.Risky"}}</div>{{/if}}
+        {{#if outcome.deathMove}}<div class="hp-callout death"><i class="fa-solid fa-skull"></i> {{localize "DHHOTPOT.Serve.Death"}}</div>{{/if}}
+        {{#if outcome.builtForSpeed}}<div class="hp-callout familiar"><i class="fa-solid fa-person-running"></i> {{localize "DHHOTPOT.Serve.Speed"}}</div>{{/if}}
+      </div>
+      <div class="hp-sets compact">
+        {{#each sets}}<div class="hp-set"><div class="hp-set-dice">{{#each dice}}<span class="hp-die tiny">{{{this}}}</span>{{/each}}</div><span class="hp-set-value">+{{value}}</span></div>{{/each}}
+        {{#if lastDrop}}<div class="hp-set lastdrop"><span class="hp-feature-tag"><i class="fa-solid fa-star"></i> {{localize "DHHOTPOT.Cook.LastDrop"}}</span><span class="hp-set-value">+{{lastDrop}}</span></div>{{/if}}
+      </div>
+    </section>
+
+    <section class="hp-diners">
+      {{#each diners}}
+      <article class="hp-diner {{#if full}}full{{/if}}">
+        <header>
+          <img src="{{img}}" alt="" data-action="openSheet" data-actor-id="{{id}}">
+          <h3>{{name}}</h3>
+          {{#if @root.showAlloc}}
+          <span class="hp-left">{{localize "DHHOTPOT.Serve.Left" n=left}}</span>
+          {{#if canEdit}}<button type="button" class="hp-btn small" data-action="autoAlloc" data-actor-id="{{id}}"><i class="fa-solid fa-wand-magic-sparkles"></i> {{localize "DHHOTPOT.Serve.Auto"}}</button>{{/if}}
+          {{/if}}
+        </header>
+        {{#if @root.showAlloc}}<div class="hp-meter"><span style="width: {{pct}}%"></span></div>{{/if}}
+        {{#each rows}}
+        <div class="hp-res res-{{res}} {{#if locked}}locked{{/if}}">
+          <i class="{{icon}} hp-res-icon"></i>
+          <span class="hp-res-label">{{label}}<small>{{detail}}</small></span>
+          <div class="hp-pips">{{#each pips}}<span class="{{state}}"></span>{{/each}}</div>
+          {{#if @root.showAlloc}}
+          <div class="hp-stepper">
+            <button type="button" data-action="alloc" data-actor-id="{{../id}}" data-res="{{res}}" data-delta="-1" {{#unless canDown}}disabled{{/unless}}><i class="fa-solid fa-minus"></i></button>
+            <b>{{value}}</b>
+            <button type="button" data-action="alloc" data-actor-id="{{../id}}" data-res="{{res}}" data-delta="1" {{#unless canUp}}disabled{{/unless}}><i class="fa-solid fa-plus"></i></button>
+          </div>
+          {{/if}}
+        </div>
+        {{/each}}
+      </article>
+      {{else}}
+      <p class="hp-empty">{{localize "DHHOTPOT.Serve.NoDiners"}}</p>
+      {{/each}}
+    </section>
+
+    <footer class="hp-serve-foot">
+      {{#if watching}}<p class="hp-callout watch"><i class="fa-solid fa-eye"></i> {{localize "DHHOTPOT.Live.YourShare" name=watching.name}}</p>{{/if}}
+      <button type="button" class="hp-big-btn" data-action="serve"><i class="fa-solid fa-utensils"></i> {{localize "DHHOTPOT.Serve.Go"}}</button>
+    </footer>
+  </div>
+  {{/if}}
+
+  {{!-- ============ DONE ============ --}}
+  {{#if phase.done}}
+  <div class="hp-done">
+    {{#if mealArt}}<img class="hp-meal-art" src="{{mealArt}}" alt="">{{/if}}
+    <div class="hp-panel hp-done-card">
+      <h1>{{localize "DHHOTPOT.Done.Title"}}</h1>
+      <h2>{{served.name}}</h2>
+      {{#if served.description}}<p class="hp-desc">{{served.description}}</p>{{/if}}
+      <div class="hp-rating big">
+        <span class="hp-rating-label">{{localize "DHHOTPOT.Cook.Rating"}}</span>
+        <span class="hp-rating-value">{{served.rating}}</span>
+      </div>
+      <ul class="hp-done-diners">
+        {{#each served.diners}}
+        <li>
+          <img src="{{img}}" alt=""><span>{{name}}</span>
+          {{#if @root.served.outcome.fullClear}}<em class="tag hope"><i class="fa-solid fa-wand-magic-sparkles"></i> {{localize "DHHOTPOT.Done.FullClear"}}</em>{{else}}
+          {{#if hp}}<em class="tag hp"><i class="fa-solid fa-heart"></i> −{{hp}}</em>{{/if}}
+          {{#if stress}}<em class="tag stress"><i class="fa-solid fa-bolt"></i> −{{stress}}</em>{{/if}}
+          {{#if hope}}<em class="tag hope"><i class="fa-solid fa-sun"></i> +{{hope}}</em>{{/if}}
+          {{/if}}
+        </li>
+        {{/each}}
+      </ul>
+      <p class="hp-hint center"><i class="fa-solid fa-book-open"></i> {{localize "DHHOTPOT.Done.Saved"}}</p>
+      <button type="button" class="hp-big-btn" data-action="reset"><i class="fa-solid fa-fire-burner"></i> {{localize "DHHOTPOT.Done.Again"}}</button>
+    </div>
+  </div>
+  {{/if}}
+
+  {{/if}}
+
+  {{!-- ============ COOKBOOK ============ --}}
+  {{#if tab.cookbook}}
+  <div class="hp-cookbook">
+    <header>
+      <h2><i class="fa-solid fa-book-open"></i> {{localize "DHHOTPOT.Cookbook.Title"}}</h2>
+      <p class="hp-hint">{{localize "DHHOTPOT.Cookbook.Hint"}}</p>
+    </header>
+    <div class="hp-cookbook-list">
+      {{#each cookbook}}
+      <article class="hp-recipe-card">
+        <div class="hp-rc-rating"><span>{{rating}}</span><small>{{localize "DHHOTPOT.Cookbook.Rating"}}</small></div>
+        <div class="hp-rc-body">
+          <h3>{{name}}</h3>
+          <div class="hp-rc-meta">{{date}} · {{cook}} · {{dice}} · {{localize "DHHOTPOT.Cookbook.Times" n=times}}</div>
+          {{#if description}}<p class="hp-desc">{{description}}</p>{{/if}}
+          <div class="hp-profile-bar slim">{{#each bar}}<span style="width: {{pct}}%; --c: {{color}}" data-tooltip="{{label}} ×{{n}}"></span>{{/each}}</div>
+          <div class="hp-rc-ings">{{#each ingredients}}<img src="{{img}}" alt="{{name}}" class="{{#if missing}}missing{{/if}}" data-tooltip="{{name}}">{{/each}}</div>
+          <button type="button" class="hp-btn small hp-cook-again" data-action="cookAgain" data-recipe-id="{{id}}" data-tooltip="{{cookAgainHint}}" {{#unless canCookAgain}}disabled{{/unless}}>
+            <i class="fa-solid fa-rotate-right"></i> {{localize "DHHOTPOT.Cookbook.CookAgain"}}
+          </button>
+        </div>
+        {{#if @root.isGM}}
+        <button type="button" class="hp-icon-btn" data-action="deleteRecipe" data-recipe-id="{{id}}" data-tooltip="{{localize "DHHOTPOT.Cookbook.DeleteTitle"}}"><i class="fa-solid fa-trash"></i></button>
+        {{/if}}
+      </article>
+      {{else}}
+      <p class="hp-empty"><i class="fa-solid fa-feather-pointed"></i><br>{{localize "DHHOTPOT.Cookbook.Empty"}}</p>
+      {{/each}}
+    </div>
+  </div>
+  {{/if}}
+</div>

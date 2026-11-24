@@ -1,0 +1,13 @@
+# secrets
+.env
+.env.*
+
+# LevelDB runtime files (Foundry recreates them)
+packs/*/LOCK
+packs/*/LOG
+packs/*/LOG.old
+
+# build output
+module.zip
+node_modules/
+.DS_Store

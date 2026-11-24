@@ -1,0 +1,97 @@
+{
+  "id": "dh-hotpot",
+  "title": "Hotpot: Beast Feast Cooking",
+  "description": "A visual kitchen for the Beast Feast campaign frame. Throw ingredients into the pot, roll flavor dice, collect matches and serve the Meal Rating to your party. Uses the ingredient items from the Daggerheart Core Rulebook module.",
+  "version": "0.4.0",
+  "compatibility": {
+    "minimum": "14",
+    "verified": "14.370"
+  },
+  "authors": [
+    {
+      "name": "emberite",
+      "email": "emberite@geeks.gay",
+      "url": "https://github.com/emberite"
+    }
+  ],
+  "url": "https://github.com/emberite/dh-hotpot",
+  "manifest": "https://github.com/emberite/dh-hotpot/releases/latest/download/module.json",
+  "download": "https://github.com/emberite/dh-hotpot/releases/download/v0.4.0/module.zip",
+  "bugs": "https://github.com/emberite/dh-hotpot/issues",
+  "relationships": {
+    "systems": [
+      {
+        "id": "daggerheart",
+        "type": "system",
+        "compatibility": {
+          "minimum": "2.12.0"
+        }
+      }
+    ],
+    "recommends": [
+      {
+        "id": "daggerheart-core",
+        "type": "module",
+        "reason": "Provides the Beast Feast ingredient items and the ingredient item category."
+      },
+      {
+        "id": "dice-so-nice",
+        "type": "module",
+        "reason": "Flavor dice are rolled in 3D, colored by flavor."
+      }
+    ]
+  },
+  "esmodules": [
+    "scripts/main.mjs"
+  ],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json"
+    }
+  ],
+  "packs": [
+    {
+      "name": "beast-feast-adversaries",
+      "label": "Beast Feast Adversaries",
+      "type": "Actor",
+      "system": "daggerheart",
+      "path": "packs/beast-feast-adversaries",
+      "ownership": {
+        "PLAYER": "NONE",
+        "ASSISTANT": "OWNER"
+      }
+    },
+    {
+      "name": "beast-feast-maps",
+      "label": "Beast Feast Maps",
+      "type": "Adventure",
+      "system": "daggerheart",
+      "path": "packs/beast-feast-maps",
+      "ownership": {
+        "PLAYER": "NONE",
+        "ASSISTANT": "OWNER"
+      }
+    }
+  ],
+  "packFolders": [
+    {
+      "name": "Daggerheart",
+      "sorting": "m",
+      "color": "#5d88bb",
+      "folders": [
+        {
+          "name": "Hotpot",
+          "sorting": "m",
+          "color": "#a8521a",
+          "packs": [
+            "beast-feast-adversaries",
+            "beast-feast-maps"
+          ]
+        }
+      ]
+    }
+  ],
+  "socket": true
+}

@@ -1,0 +1,30 @@
+<div class="dh-hotpot-card">
+  <header>
+    <i class="fa-solid fa-bowl-food"></i>
+    <div>
+      <h3>{{name}}</h3>
+      <span class="hp-cc-dice">{{dice}}</span>
+    </div>
+    <span class="hp-cc-rating" data-tooltip="{{localize "DHHOTPOT.Cook.Rating"}}"><b>{{rating}}</b></span>
+  </header>
+  {{#if description}}<p class="hp-cc-desc">{{description}}</p>{{/if}}
+  <div class="hp-cc-ings">{{#each ingredients}}<img src="{{img}}" alt="{{name}}" data-tooltip="{{name}}">{{/each}}</div>
+  {{#if sets.length}}<div class="hp-cc-sets">{{#each sets}}<span>{{this}}</span>{{/each}}{{#if lastDrop}}<span class="ld">+{{lastDrop}}</span>{{/if}}</div>{{/if}}
+  {{#if familiarName}}<p class="hp-cc-note"><i class="fa-solid fa-book-bookmark"></i> {{localize "DHHOTPOT.Recipe.Familiar" name=familiarName}}</p>{{/if}}
+  {{#if noStress}}<p class="hp-cc-note"><i class="fa-solid fa-pepper-hot"></i> {{localize "DHHOTPOT.Serve.Spicy"}}</p>{{/if}}
+  {{#if fullClear}}<p class="hp-cc-note good"><i class="fa-solid fa-wand-magic-sparkles"></i> {{localize "DHHOTPOT.Serve.Risky"}}</p>{{/if}}
+  {{#if deathMove}}<p class="hp-cc-note bad"><i class="fa-solid fa-skull"></i> {{localize "DHHOTPOT.Serve.Death"}}</p>{{/if}}
+  {{#if builtForSpeed}}<p class="hp-cc-note"><i class="fa-solid fa-person-running"></i> {{localize "DHHOTPOT.Serve.Speed"}}</p>{{/if}}
+  <ul class="hp-cc-diners">
+    {{#each diners}}
+    <li>
+      <img src="{{img}}" alt=""><span>{{name}}</span>
+      {{#if @root.fullClear}}<em class="hope">{{localize "DHHOTPOT.Done.FullClear"}}</em>{{else}}
+      {{#if hp}}<em class="hp"><i class="fa-solid fa-heart"></i> −{{hp}}</em>{{/if}}
+      {{#if stress}}<em class="stress"><i class="fa-solid fa-bolt"></i> −{{stress}}</em>{{/if}}
+      {{#if hope}}<em class="hope"><i class="fa-solid fa-sun"></i> +{{hope}}</em>{{/if}}
+      {{/if}}
+    </li>
+    {{/each}}
+  </ul>
+</div>
