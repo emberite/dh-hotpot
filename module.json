@@ -79,19 +79,12 @@
   ],
   "packFolders": [
     {
-      "name": "Daggerheart",
+      "name": "Hotpot",
       "sorting": "m",
-      "color": "#5d88bb",
-      "folders": [
-        {
-          "name": "Hotpot",
-          "sorting": "m",
-          "color": "#a8521a",
-          "packs": [
-            "beast-feast-adversaries",
-            "beast-feast-maps"
-          ]
-        }
+      "color": "#a8521a",
+      "packs": [
+        "beast-feast-adversaries",
+        "beast-feast-maps"
       ]
     }
   ],

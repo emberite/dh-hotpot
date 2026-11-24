@@ -32,7 +32,9 @@ export async function getLarder({ create = false } = {}) {
         return folder ? { mode: 'folder', folder } : null;
     }
     let pack = game.packs.get(`world.${PACK_NAME}`);
+    let created = false;
     if (!pack && create) {
+        created = true;
         pack = await foundry.documents.collections.CompendiumCollection.createCompendium({
             name: PACK_NAME,
             label: L('Larder.Name'),
@@ -40,7 +42,38 @@ export async function getLarder({ create = false } = {}) {
             system: game.system.id
         });
     }
+    // a larder we just made always goes in the Hotpot folder (old settings can outlive a deleted pack)
+    if (pack && created) await placeLarder(pack, { force: true });
     return pack ? { mode: 'compendium', pack } : null;
+}
+
+/** The "Hotpot" compendium folder: wherever the module's own compendiums live, else a top-level one. */
+function hotpotFolder() {
+    const own = game.packs.get(`${MODULE_ID}.beast-feast-adversaries`)?.folder;
+    if (own) return own;
+    return game.folders.find(f => f.type === 'Compendium' && f.name === 'Hotpot' && !f.folder) ?? null;
+}
+
+/**
+ * Versions before 0.5.1 nested the Hotpot folder inside "Daggerheart". Foundry only rebuilds pack folders
+ * when the set of active compendiums changes, so existing worlds keep that layout; lift it to the top level.
+ */
+export async function liftHotpotFolder() {
+    if (!game.user.isGM) return;
+    const folder = game.packs.get(`${MODULE_ID}.beast-feast-adversaries`)?.folder;
+    if (folder?.name === 'Hotpot' && folder.folder?.name === 'Daggerheart') await folder.update({ folder: null });
+}
+
+/**
+ * Put the world larder compendium in the Hotpot folder next to the module's compendiums,
+ * unless the GM has already filed it somewhere themselves.
+ */
+export async function placeLarder(pack = game.packs.get(`world.${PACK_NAME}`), { force = false } = {}) {
+    if (!pack || !game.user.isGM) return;
+    // undefined = never filed; null = the GM deliberately put it at the top level, so leave it
+    if (!force && pack.config?.folder !== undefined) return;
+    const folder = hotpotFolder();
+    if (folder) await pack.setFolder(folder);
 }
 
 /** Every ingredient in the larder, newest first. */

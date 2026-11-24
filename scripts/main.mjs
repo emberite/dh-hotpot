@@ -4,6 +4,7 @@ import { IngredientForge } from './generator.mjs';
 import { CookSession, buildDice, profileKey, profileOf } from './cooking.mjs';
 import { listen, registerRelay } from './relay.mjs';
 import { registerFrameGear } from './frame-gear.mjs';
+import { liftHotpotFolder, placeLarder } from './larder.mjs';
 
 let kitchen = null;
 let forge = null;
@@ -88,6 +89,9 @@ Hooks.once('setup', () => registerFrameGear());
 
 Hooks.once('ready', () => {
     registerRelay();
+    liftHotpotFolder()
+        .then(() => placeLarder())
+        .catch(err => console.warn('dh-hotpot | could not file the compendiums', err));
 
     // A cook's kitchen is live: follow along.
     listen('kitchen:state', ({ snap, summon }, from) => {
