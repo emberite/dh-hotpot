@@ -79,6 +79,10 @@ While the setting is on (the default):
 
 ## License
 
+The Hotpot module (its code, templates, styles and original content) is released under the [MIT License](LICENSE). © 2026 emberite.
+
+The MIT License doesn't cover Daggerheart material. Rules content used here falls under the notice below. The Daggerheart Core Rulebook module's items, tables, art and map are loaded from that module at runtime and are not included in this repository.
+
 This product includes materials from the
 Daggerheart System Reference Document
 2.0, © Critical Role, LLC. under the terms of
