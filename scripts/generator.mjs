@@ -437,7 +437,7 @@ export class IngredientForge extends HandlebarsApplicationMixin(ApplicationV2) {
 
     static async #onRollBloom() {
         const roll = await new Roll('1d12').evaluate();
-        if (game.dice3d) await game.dice3d.showForRoll(roll, game.user, true);
+        if (game.dice3d && game.settings.get(MODULE_ID, 'diceSoNice')) await game.dice3d.showForRoll(roll, game.user, true);
         const value = roll.total;
         const flavor = bloomFlavor(value);
         this.bloomRoll = { value, flavor };

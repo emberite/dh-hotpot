@@ -2,7 +2,7 @@
 
 A Foundry VTT module for running the **Beast Feast** campaign frame in [Daggerheart](https://www.daggerheart.com). It turns cooking into a shared, animated scene at the table. Throw ingredients into the pot, roll the flavor dice, collect matches and serve the Meal Rating to the party. It also adds a GM ingredient generator, Beast Feast equipment in character creation, a ready-to-use campaign map and a compendium of food-themed adversaries for Tiers 1–4.
 
-![The Hotpot kitchen with ingredients in the pot](docs/screenshots/02-prep-filled.webp)
+![The Hotpot kitchen with ingredients bubbling in the pot](docs/img/kitchen-pot.webp)
 
 ## Requirements
 
@@ -23,14 +23,16 @@ https://github.com/emberite/dh-hotpot/releases/latest/download/module.json
 
 | | |
 |---|---|
-| ![Empty pot with the party's pantry](docs/screenshots/01-prep-empty.webp) | ![Ingredients in the pot, flavor dice and recipe card filled in](docs/screenshots/02-prep-filled.webp) |
-| **Prep:** the pantry lists what each character and the party stash carries. | Ingredients bob in the pot while the flavor dice and profile build up. Name the dish and pick the diners. |
-| ![The flavor dice laid out on the stove, ready to roll](docs/screenshots/03-cook-start.webp) | ![Dice So Nice rolling the flavor dice in 3D](docs/screenshots/04-cook-rolling.webp) |
-| **Cook:** the flavor dice wait on the stove. The whole table watches live. | Roll the pot. With Dice So Nice everyone sees the 3D dice. |
-| ![Matched dice glowing and the Meal Rating climbing](docs/screenshots/05-cook-matches.webp) | ![The meal is ready with every matched set on the plate](docs/screenshots/06-cook-done.webp) |
-| Matching dice glow and move to the plate as sets. | One die left and the meal is done. Every set adds to the Meal Rating. |
-| ![Bon appétit! summary with each diner's share](docs/screenshots/07-feast.webp) | ![The party cookbook with the finished recipe](docs/screenshots/08-cookbook.webp) |
-| **Serve:** each diner's share is applied to their sheet. | The dish goes into the party cookbook, ready to **Cook again**. |
+| ![The pantry with each character's ingredients and an empty pot](docs/img/kitchen-prep.webp) | ![Ingredients in the pot, the flavor dice and the recipe card filled in](docs/img/kitchen-pot.webp) |
+| **Prep:** the pantry shows what every character and the party stash carries, with carry limits. | Ingredients bob in the pot while the flavor dice build up. This flavor profile is already in the cookbook, so it earns a familiarity token. |
+| ![The flavor dice laid out on the stove, ready to roll](docs/img/cook-stove.webp) | ![Dice So Nice throwing the flavor dice in 3D, colored by flavor](docs/img/cook-rolling.webp) |
+| **Cook:** the whole table watches live as the cook rolls the pot. | With Dice So Nice, the 3D dice come out in their flavor colors. |
+| ![Matched dice glowing as they land on the plate](docs/img/cook-matches.webp) | ![The meal is ready with every matched set on the plate](docs/img/cook-done.webp) |
+| Matching dice glow and move to the plate as sets. | One die left: the meal is ready. Discards and spent tokens are in the log. |
+| ![Each diner splitting the Meal Rating between HP, Stress and Hope](docs/img/serve.webp) | ![The Bon appétit summary with what each diner got](docs/img/feast.webp) |
+| **Serve:** every diner splits the full Meal Rating between clearing HP, clearing Stress and gaining Hope. | The feast is applied to everyone's sheet at once. |
+| ![The party cookbook with three recipes](docs/img/cookbook.webp) | ![The themed meal card in chat](docs/img/chat-card.webp) |
+| The dish goes into the party cookbook, ready to **Cook again**. | A themed card in chat records the meal for everyone. |
 
 ## Features
 
@@ -69,8 +71,8 @@ Open it from the **Beast Feast** section of the Daggerheart sidebar menu.
 
 | | | |
 |---|---|---|
-| ![Harvesting a Dumpling Toad in the Ingredient Generator](docs/screenshots/09-forge-beast.webp) | ![Rolling the Hope Die on the bloom table](docs/screenshots/10-forge-bloom.webp) | ![A blank custom ingredient](docs/screenshots/11-forge-custom.webp) |
-| **Beast:** a Dumpling Toad yields Dumpling Skin. | **Bloom:** a 1 on the Hope Die gives a Sweet bloom. | **Custom:** set every flavor yourself. |
+| ![Harvesting a Burgerback Tortoise in the Ingredient Generator](docs/img/forge-beast.webp) | ![Rolling the Hope Die on the bloom table](docs/img/forge-bloom.webp) | ![The larder with give buttons for each character](docs/img/forge-larder.webp) |
+| **Beast:** a Burgerback Tortoise yields its Patty and Bunshell Crust. | **Bloom:** a 3 on the Hope Die gives a Salty bloom. | **Larder:** one click gives a serving to a character or the party stash. |
 
 ### Beast Feast equipment
 
@@ -83,6 +85,11 @@ While the setting is on (the default):
 
 - **Beast Feast Adversaries:** 45 food-themed adversaries across Tiers 1–4 and every adversary type. Cave beasts like the Glutton Ogre and the Stew Sea Leviathan, fast-food foes like Fryling Swarms and the Supersize Hydra, and comfort-food creatures like Granny Gruel and the Mac and Cheese Colossus. Each lists what it yields when harvested.
 - **Beast Feast Maps:** an adventure that imports the campaign map as a scene. It has pins for Elmore, the Plover Caves, the labeled regions and the four depths, plus a journal linking each pin to the matching Core Rulebook section. The map image is loaded from the Core Rulebook module.
+
+| | | |
+|---|---|---|
+| ![Make a Feast on the party sheet](docs/img/party-sheet.webp) | ![The Hotpot compendiums with the Beast Feast cover](docs/img/compendiums.webp) | ![The Supersize Hydra adversary sheet](docs/img/adversary-sheet.webp) |
+| **Make a Feast** sits on the party sheet. | The Hotpot compendiums, with the Beast Feast cover. | One of the 45 adversaries: the Supersize Hydra. |
 
 ## Settings
 
