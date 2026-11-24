@@ -6,7 +6,7 @@ A Foundry VTT module for running the **Beast Feast** campaign frame in [Daggerhe
 
 - **Foundry VTT** v14
 - **Daggerheart** system 2.12 or later
-- **Daggerheart Core Rulebook** module (`daggerheart-core`): provides the Beast Feast ingredient items, the ingredient generator tables, the campaign map and the art and theme the kitchen uses. Hotpot doesn't include any of that content itself.
+- [**Daggerheart Core Rulebook**](https://www.foundryvtt.store/products/daggerheart-core) module (`daggerheart-core`): provides the Beast Feast ingredient items, the ingredient generator tables, the campaign map and the art and theme the kitchen uses. Hotpot doesn't include any of that content itself.
 - Optional: **Dice So Nice** for 3D flavor dice
 
 ## Installation
@@ -81,7 +81,7 @@ While the setting is on (the default):
 
 The Hotpot module (its code, templates, styles and original content) is released under the [MIT License](LICENSE). © 2026 emberite.
 
-The MIT License doesn't cover Daggerheart material. Rules content used here falls under the notice below. The Daggerheart Core Rulebook module's items, tables, art and map are loaded from that module at runtime and are not included in this repository.
+The MIT License doesn't cover Daggerheart material. Rules content used here falls under the notice below. The [Daggerheart Core Rulebook](https://www.foundryvtt.store/products/daggerheart-core) module's items, tables, art and map are loaded from that module at runtime and are not included in this repository.
 
 This product includes materials from the
 Daggerheart System Reference Document
