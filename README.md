@@ -2,6 +2,8 @@
 
 A Foundry VTT module for running the **Beast Feast** campaign frame in [Daggerheart](https://www.daggerheart.com). It turns cooking into a shared, animated scene at the table. Throw ingredients into the pot, roll the flavor dice, collect matches and serve the Meal Rating to the party. It also adds a GM ingredient generator, Beast Feast equipment in character creation, a ready-to-use campaign map and a compendium of food-themed adversaries for Tiers 1–4.
 
+![The Hotpot kitchen with ingredients in the pot](docs/screenshots/02-prep-filled.webp)
+
 ## Requirements
 
 - **Foundry VTT** v14
@@ -16,6 +18,19 @@ In Foundry's **Add-on Modules → Install Module**, paste this manifest URL:
 ```
 https://github.com/emberite/dh-hotpot/releases/latest/download/module.json
 ```
+
+## A meal from start to finish
+
+| | |
+|---|---|
+| ![Empty pot with the party's pantry](docs/screenshots/01-prep-empty.webp) | ![Ingredients in the pot, flavor dice and recipe card filled in](docs/screenshots/02-prep-filled.webp) |
+| **Prep:** the pantry lists what each character and the party stash carries. | Ingredients bob in the pot while the flavor dice and profile build up. Name the dish and pick the diners. |
+| ![The flavor dice laid out on the stove, ready to roll](docs/screenshots/03-cook-start.webp) | ![Dice So Nice rolling the flavor dice in 3D](docs/screenshots/04-cook-rolling.webp) |
+| **Cook:** the flavor dice wait on the stove. The whole table watches live. | Roll the pot. With Dice So Nice everyone sees the 3D dice. |
+| ![Matched dice glowing and the Meal Rating climbing](docs/screenshots/05-cook-matches.webp) | ![The meal is ready with every matched set on the plate](docs/screenshots/06-cook-done.webp) |
+| Matching dice glow and move to the plate as sets. | One die left and the meal is done. Every set adds to the Meal Rating. |
+| ![Bon appétit! summary with each diner's share](docs/screenshots/07-feast.webp) | ![The party cookbook with the finished recipe](docs/screenshots/08-cookbook.webp) |
+| **Serve:** each diner's share is applied to their sheet. | The dish goes into the party cookbook, ready to **Cook again**. |
 
 ## Features
 
