@@ -2,7 +2,7 @@
   "id": "dh-hotpot",
   "title": "Hotpot: Beast Feast Cooking",
   "description": "A visual kitchen for the Beast Feast campaign frame. Throw ingredients into the pot, roll flavor dice, collect matches and serve the Meal Rating to your party. Uses the ingredient items from the Daggerheart Core Rulebook module.",
-  "version": "0.5.3",
+  "version": "0.5.4",
   "compatibility": {
     "minimum": "14",
     "verified": "14.370"
@@ -16,7 +16,7 @@
   ],
   "url": "https://github.com/emberite/dh-hotpot",
   "manifest": "https://github.com/emberite/dh-hotpot/releases/latest/download/module.json",
-  "download": "https://github.com/emberite/dh-hotpot/releases/download/v0.5.3/module.zip",
+  "download": "https://github.com/emberite/dh-hotpot/releases/download/v0.5.4/module.zip",
   "bugs": "https://github.com/emberite/dh-hotpot/issues",
   "readme": "README.md",
   "license": "LICENSE",
