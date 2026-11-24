@@ -1229,3 +1229,20 @@
 .dh-hotpot img[src*="beastfeast-ingedient"] { object-fit: contain; }
 
 .dh-hotpot .hp-beast-info .hp-beast-yields { color: var(--hp-gold); text-transform: none; font-size: 0.72rem; }
+
+/* ==========================================================================
+   Compendium sidebar: Beast Feast cover behind the Hotpot folder,
+   like the Core Rulebook module does for its own compendiums
+   ========================================================================== */
+#compendium ol.subdirectory:has(> li[data-pack^="dh-hotpot."]),
+#compendium ol.subdirectory:has(> li[data-pack="world.hotpot-larder"]) {
+  background-color: #0e1625;
+  background-image: url(../../daggerheart-core/assets/art/frame-252-beastfeast-intro-transparent.webp);
+  background-position: 50% 30%;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+#compendium ol.subdirectory:has(> li[data-pack^="dh-hotpot."]) img,
+#compendium ol.subdirectory:has(> li[data-pack="world.hotpot-larder"]) img {
+  display: none;
+}
