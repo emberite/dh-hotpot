@@ -61,6 +61,15 @@ Hooks.once('init', () => {
         type: Boolean,
         default: true
     });
+    game.settings.register(MODULE_ID, 'hideRestButtons', {
+        name: 'DHHOTPOT.Settings.HideRestButtons.Name',
+        hint: 'DHHOTPOT.Settings.HideRestButtons.Hint',
+        scope: 'world',
+        config: true,
+        type: Boolean,
+        default: true,
+        onChange: value => toggleRestButtons(value)
+    });
     game.settings.register(MODULE_ID, 'larderStorage', {
         name: 'DHHOTPOT.Settings.LarderStorage.Name',
         hint: 'DHHOTPOT.Settings.LarderStorage.Hint',
@@ -82,10 +91,35 @@ Hooks.once('init', () => {
         onChange: () => kitchen?.rendered && kitchen.render()
     });
 
-    game.modules.get(MODULE_ID).api = { open: openKitchen, openForge, CookSession, buildDice, profileOf, profileKey };
+    game.modules.get(MODULE_ID).api = { open: openKitchen, openForge, resetSettings, CookSession, buildDice, profileOf, profileKey };
 });
 
 Hooks.once('setup', () => registerFrameGear());
+
+/** Beast Feast replaces rest downtime with Make a Feast: hide the character sheet's rest buttons. */
+function toggleRestButtons(hidden = game.settings.get(MODULE_ID, 'hideRestButtons')) {
+    document.body.classList.toggle('dh-hotpot-no-rest', !!hidden);
+}
+Hooks.once('ready', () => toggleRestButtons());
+
+/**
+ * When the module is disabled, put every Hotpot option back to its default, so re-enabling starts fresh.
+ * Foundry saves the new module list before reloading, while this code is still loaded on every client:
+ * the GM resets world options and each client resets its own. Data (the party cookbooks) is kept.
+ */
+Hooks.on('updateSetting', setting => {
+    if (setting.key !== 'core.moduleConfiguration') return;
+    if (game.settings.get('core', 'moduleConfiguration')?.[MODULE_ID] !== false) return;
+    resetSettings().catch(err => console.warn(`${MODULE_ID} | could not reset settings`, err));
+});
+
+export async function resetSettings() {
+    for (const s of game.settings.settings.values()) {
+        if (s.namespace !== MODULE_ID || !s.config) continue;
+        if (s.scope === CONST.SETTING_SCOPES.WORLD && !game.user.isActiveGM) continue;
+        await game.settings.set(MODULE_ID, s.key, s.default);
+    }
+}
 
 Hooks.once('ready', () => {
     registerRelay();

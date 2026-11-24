@@ -90,6 +90,9 @@ While the setting is on (the default):
 - **Roll flavor dice in 3D:** uses Dice So Nice when it's active.
 - **Larder storage:** a world compendium or an Items folder.
 - **Beast Feast equipment:** the compendium browser filter and the starting gear suggestions.
+- **Hide rest buttons on character sheets** (on by default): in Beast Feast the party makes a feast instead of using rest downtime moves, so the short and long rest buttons are hidden.
+
+Disabling the module puts all of these options back to their defaults. The party cookbooks are kept.
 
 ## Development
 

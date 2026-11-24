@@ -253,6 +253,10 @@
       "BeastFeastGear": {
         "Name": "Beast Feast equipment",
         "Hint": "The compendium browser starts filtered to Beast Feast items (clear the Campaign Frame filter to see everything), and character creation suggests Beast Feast starting gear instead of the standard class gear."
+      },
+      "HideRestButtons": {
+        "Name": "Hide rest buttons on character sheets",
+        "Hint": "In Beast Feast, the party makes a feast instead of using rest downtime moves. Hides the short and long rest buttons on character sheets."
       }
     },
     "Gear": {

@@ -1246,3 +1246,8 @@
 #compendium ol.subdirectory:has(> li[data-pack="world.hotpot-larder"]) img {
   display: none;
 }
+
+/* setting: hide the character sheet's short/long rest buttons */
+body.dh-hotpot-no-rest .application.sheet.character [data-action="useDowntime"] {
+  display: none !important;
+}
