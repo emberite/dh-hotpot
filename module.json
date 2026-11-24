@@ -41,6 +41,20 @@
         "type": "module",
         "reason": "Flavor dice are rolled in 3D, colored by flavor."
       }
+    ],
+    "conflicts": [
+      {
+        "id": "dh-5banners",
+        "type": "module"
+      },
+      {
+        "id": "dh-weredragon",
+        "type": "module"
+      },
+      {
+        "id": "dh-horizon",
+        "type": "module"
+      }
     ]
   },
   "esmodules": [
