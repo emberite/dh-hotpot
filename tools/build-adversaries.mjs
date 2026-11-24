@@ -238,25 +238,30 @@ async function applyAttack(actor, atk) {
 }
 
 /**
- * Build everything into the module compendium (replacing what's there).
+ * Build adversaries into the module compendium.
+ * With no `only`, the compendium is wiped and rebuilt (every adversary gets a new ID).
+ * With `only: ['Name', …]`, just those adversaries are (re)built and everything else keeps its ID.
  * @returns {Promise<string[]>} summary lines
  */
-export async function buildAdversaries({ pack: packId = PACK } = {}) {
+export async function buildAdversaries({ pack: packId = PACK, only = null } = {}) {
     const pack = game.packs.get(packId);
     if (!pack) throw new Error(`Missing pack ${packId}`);
     await pack.configure({ locked: false });
     const old = await pack.getDocuments();
-    if (old.length) await Actor.deleteDocuments(old.map(a => a.id), { pack: packId });
-    for (const f of pack.folders.contents) await f.delete();
+    const replace = only ? old.filter(a => only.includes(a.name)) : old;
+    if (replace.length) await Actor.deleteDocuments(replace.map(a => a.id), { pack: packId });
+    if (!only) for (const f of pack.folders.contents) await f.delete();
 
     const folders = {};
     for (const t of [1, 2, 3, 4]) {
-        folders[t] = await Folder.create({ name: `Tier ${t}`, type: 'Actor', sorting: 'a' }, { pack: packId });
+        folders[t] = pack.folders.find(f => f.name === `Tier ${t}`)
+            ?? (await Folder.create({ name: `Tier ${t}`, type: 'Actor', sorting: 'a' }, { pack: packId }));
     }
 
     const std = await loadStandardFeatures();
     const summary = [];
     for (const def of ADVERSARIES) {
+        if (only && !only.includes(def.name)) continue;
         const data = actorData(def, std);
         const atk = data._attack;
         delete data._attack;

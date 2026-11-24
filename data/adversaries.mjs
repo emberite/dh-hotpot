@@ -568,6 +568,28 @@ export const ADVERSARIES = [
         harvest: [I('Nugget Grub', { salty: 1, savory: 1 }, 'It\'s particularly tender.')]
     },
     {
+        name: 'Chicken Nugget',
+        tier: 1, type: 'standard', size: 'small',
+        img: 'icons/creatures/birds/chicken-hen-white.webp',
+        description: 'A hen-sized lump of golden breading on stubby chicken legs, with a little beak poking out of the crust. It struts, pecks and crows at the cave-dawn like it owns the place.',
+        motives: 'Strut, peck, dunk in sauce, call the flock',
+        difficulty: 12, thresholds: [5, 10], hp: 4, stress: 3,
+        attack: { name: 'Crispy Peck', range: 'melee', bonus: 1, damage: '1d8+1' },
+        experiences: [['Puff Up the Breading', 2]],
+        features: [
+            { name: 'Crispy Coating', form: 'reaction', img: 'icons/consumables/grains/bread-loaf-boule-rustic-brown.webp',
+              text: '<p>When the @Lookup[@name] would take Major damage, you can <strong>mark a Stress</strong> to have the breading crack instead. They take Minor damage.</p>',
+              act: { type: 'effect', cost: { stress: 1 } } },
+            { name: 'Dipping Sauce', form: 'action', img: 'icons/commodities/materials/slime-thick-orange.webp',
+              text: '<p><strong>Mark a Stress</strong> to dunk into a nearby puddle of sauce. Choose one: <em>Sweet and Sour</em>, and the @Lookup[@name] clears a HP; or <em>Extra Hot</em>, and their next standard attack deals an extra <strong>1d6</strong> magic damage.</p>',
+              act: { type: 'healing', cost: { stress: 1 }, heal: '1' } },
+            { name: 'Family Bucket', form: 'reaction', img: 'icons/creatures/invertebrates/beetle-grub-larvae-gray.webp',
+              text: '<p>When the @Lookup[@name] is defeated, you can <strong>spend a Fear</strong> to have <strong>1d4</strong> Nugget Grubs tumble out of the breading within Close range.</p>',
+              act: { type: 'effect', cost: { fear: 1 } } }
+        ],
+        harvest: [I('Nugget Breast', { savory: 2, salty: 1 }, 'It\'s particularly tender.'), I('Golden Breading', { salty: 1, sweet: 1 }, 'It\'s brittle.')]
+    },
+    {
         name: 'Fryling Swarm',
         tier: 1, type: 'horde', size: 'small',
         img: 'icons/creatures/invertebrates/wasp-swarm-tan.webp',
