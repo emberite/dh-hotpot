@@ -201,7 +201,8 @@ function actorData(def, std) {
             damageThresholds: isMinion ? { major: null, severe: null } : { major: def.thresholds[0], severe: def.thresholds[1] },
             resources: { hitPoints: { value: 0, max: def.hp }, stress: { value: 0, max: def.stress } },
             motivesAndTactics: def.motives,
-            description: `<p>${def.description}</p>${harvestHTML(def.harvest)}`,
+            description: `<p>${def.description}</p>`,
+            notes: harvestHTML(def.harvest),
             experiences,
             resistance,
             attribution: { source: 'Hotpot: Beast Feast Cooking', page: null, artist: '' }
