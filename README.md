@@ -61,7 +61,7 @@ While the setting is on (the default):
 
 ### Compendiums
 
-- **Beast Feast Adversaries:** 27 food-themed adversaries across Tiers 1–4 and every adversary type, from Capshroom Creepers and the Glutton Ogre to the Stew Sea Leviathan. Each lists what it yields when harvested.
+- **Beast Feast Adversaries:** 45 food-themed adversaries across Tiers 1–4 and every adversary type. Cave beasts like the Glutton Ogre and the Stew Sea Leviathan, fast-food foes like Fryling Swarms and the Supersize Hydra, and comfort-food creatures like Granny Gruel and the Mac and Cheese Colossus. Each lists what it yields when harvested.
 - **Beast Feast Maps:** an adventure that imports the campaign map as a scene. It has pins for Elmore, the Plover Caves, the labeled regions and the four depths, plus a journal linking each pin to the matching Core Rulebook section. The map image is loaded from the Core Rulebook module.
 
 ## Settings

@@ -546,5 +546,358 @@ export const ADVERSARIES = [
         ],
         resist: 'magicalImmune',
         harvest: [I('Holy Cow\'s Milk', { weird: 1 }, 'Last Drop: When you have only one die remaining while cooking, roll it and add the result to your Meal Rating.')]
+    },
+    /* ================================================================== */
+    /*  ROUND TWO: FAST FOOD                                              */
+    /* ================================================================== */
+    {
+        name: 'Nugget Grub',
+        tier: 1, type: 'minion', size: 'tiny',
+        img: 'icons/creatures/invertebrates/beetle-grub-larvae-gray.webp',
+        description: 'A fat, golden-crusted grub that rolls itself in cave grit until it\'s crunchy. They come in boxes of six, or sixty.',
+        motives: 'Roll, nip, burrow into packs, multiply',
+        difficulty: 10, hp: 1, stress: 1,
+        attack: { name: 'Crunchy Nip', range: 'melee', bonus: -1, damage: '2' },
+        experiences: [['Always One More', 2]],
+        features: [
+            { std: 'minion', n: 3 },
+            { std: 'group' },
+            { name: 'Value Size', form: 'passive', img: 'icons/creatures/invertebrates/bug-sixlegged-gray.webp',
+              text: '<p>When the @Lookup[@name] are spotlighted with Group Attack and there are six or more of them, the attack is made with advantage.</p>' }
+        ],
+        harvest: [I('Nugget Grub', { salty: 1, savory: 1 }, 'It\'s particularly tender.')]
+    },
+    {
+        name: 'Fryling Swarm',
+        tier: 1, type: 'horde', size: 'small',
+        img: 'icons/creatures/invertebrates/wasp-swarm-tan.webp',
+        description: 'A hissing cloud of crisp, salt-flecked sprites that skitter out of the hot-oil vents near Sizzling Hollow.',
+        motives: 'Swarm, scald, salt wounds, chase the hungry',
+        difficulty: 10, thresholds: [5, 10], hp: 5, stress: 3,
+        attack: { name: 'Hot Oil Spatter', range: 'veryClose', bonus: -1, damage: '1d8+2', dtype: 'magical', img: 'icons/magic/fire/flame-burning-campfire-orange.webp' },
+        hordeDamage: '1d4+2', hordeHP: 1,
+        experiences: [['Fresh From the Vent', 2]],
+        features: [
+            { name: 'Salt in the Wound', form: 'reaction', img: 'icons/commodities/materials/bowl-powder-grey.webp',
+              text: '<p>When the @Lookup[@name] succeed on a standard attack against a target who already has a HP marked, the target also marks a Stress.</p>',
+              act: { type: 'damage', resource: { stress: 1 } } }
+        ],
+        harvest: [I('Golden Fryling', { salty: 2 }, 'It\'s brittle.')]
+    },
+    {
+        name: 'Sausage Hound',
+        tier: 2, type: 'skulk', size: 'medium',
+        img: 'icons/creatures/mammals/dog-husky-white-blue.webp',
+        description: 'A long, low hound with glossy, link-like segments. It tracks prey by smell and strikes from under tables and bunks.',
+        motives: 'Sniff out food, ambush, hamstring, steal leftovers',
+        difficulty: 14, thresholds: [9, 17], hp: 4, stress: 4,
+        attack: { name: 'Snapping Jaws', range: 'melee', bonus: 3, damage: '2d8+2' },
+        experiences: [['Follow Any Scent', 3]],
+        features: [
+            { name: 'Under the Table', form: 'action', img: 'icons/magic/perception/silhouette-stealth-shadow.webp',
+              text: '<p><strong>Mark a Stress</strong> to slip out of sight and become Hidden until the @Lookup[@name] next attacks.</p>',
+              act: { type: 'effect', cost: { stress: 1 }, status: 'hidden' } },
+            { name: 'Hamstring', form: 'action', img: 'icons/creatures/abilities/bear-roar-bite-brown-green.webp',
+              text: '<p>Make an attack from hiding against a target within Melee range. On a success, deal <strong>2d8+4</strong> physical damage and the target is Vulnerable until they next take an action.</p>',
+              act: { type: 'attack', range: 'melee', damage: '2d8+4', status: 'vulnerable' } }
+        ],
+        harvest: [I('Hound Link', { savory: 2, salty: 1 })]
+    },
+    {
+        name: 'Burgerback Tortoise',
+        tier: 2, type: 'bruiser', size: 'large',
+        img: 'icons/creatures/reptiles/turtle-shell-glowing-green.webp',
+        description: 'A huge tortoise whose shell grows in layers: crust, moss, meat-colored fungus, then crust again. It bulldozes anything between it and a warm vent.',
+        motives: 'Bulldoze, withdraw, stack up, bask on vents',
+        difficulty: 15, thresholds: [14, 28], hp: 7, stress: 4,
+        attack: { name: 'Shell Ram', range: 'melee', bonus: 2, damage: '2d10+3' },
+        experiences: [['Unbudgeable', 3]],
+        features: [
+            { name: 'Stacked Shell', form: 'reaction', img: 'icons/creatures/reptiles/turtle-shell-glowing-green.webp',
+              text: '<p>When the @Lookup[@name] would take damage, you can <strong>mark a Stress</strong> to pull into their shell. Reduce the damage by one threshold (Severe to Major, Major to Minor, Minor to none).</p>',
+              act: { type: 'effect', cost: { stress: 1 } } },
+            { name: 'Drive-Through', form: 'action', img: 'icons/creatures/mammals/ox-buffalo-horned-green.webp',
+              text: '<p><strong>Spend a Fear</strong> to charge in a straight line to a point within Far range. Everyone in the way must succeed on an Agility Reaction Roll or take <strong>2d10+4</strong> physical damage and be knocked prone (Vulnerable).</p>',
+              act: { type: 'save', save: 'agility', range: 'far', cost: { fear: 1 }, damage: '2d10+4', status: 'vulnerable' } },
+            { std: 'slow' }
+        ],
+        harvest: [I('Burgerback Patty', { savory: 3 }), I('Bunshell Crust', { sweet: 1, salty: 1 }, 'It comes apart in layers.')]
+    },
+    {
+        name: 'Soda Geyser Slime',
+        tier: 2, type: 'ranged', size: 'medium',
+        img: 'icons/creatures/slimes/slime-bubble-teal.webp',
+        description: 'A fizzing, syrupy slime that builds pressure in its body and blasts sticky, sugary jets across the cavern.',
+        motives: 'Build pressure, spray, fizz, burst',
+        difficulty: 14, thresholds: [9, 17], hp: 5, stress: 4,
+        attack: { name: 'Fizz Jet', range: 'far', bonus: 2, damage: '2d8+3', img: 'icons/magic/water/projectile-water-rings.webp' },
+        experiences: [['Sticky Situation', 2]],
+        features: [
+            { name: 'Sticky Syrup', form: 'reaction', img: 'icons/commodities/materials/slime-thick-orange.webp',
+              text: '<p>When the @Lookup[@name] succeeds on a standard attack, the target is coated in syrup and can\'t move farther than Very Close range on their next turn.</p>' },
+            { name: 'Shaken Up', form: 'reaction', img: 'icons/magic/water/wave-water-blue.webp',
+              text: '<p>When the @Lookup[@name] takes Major or greater damage, they burst. All creatures within Close range must succeed on a Finesse Reaction Roll or take <strong>2d6+2</strong> physical damage.</p>',
+              act: { type: 'save', save: 'finesse', range: 'close', damage: '2d6+2' } }
+        ],
+        harvest: [I('Fizzwater Jelly', { sweet: 2, sour: 1 }, 'It\'s emitting a colorful gas.')]
+    },
+    {
+        name: 'Taco Shell Crab',
+        tier: 3, type: 'standard', size: 'large',
+        img: 'icons/creatures/fish/crab-blue-purple.webp',
+        description: 'A crab whose folded, crunchy shell opens like a clamshell to snap shut on whatever wanders inside.',
+        motives: 'Lure, clamp, crunch, scuttle sideways',
+        difficulty: 16, thresholds: [18, 35], hp: 7, stress: 5,
+        attack: { name: 'Crushing Claw', range: 'melee', bonus: 3, damage: '3d8+3' },
+        experiences: [['Hard Shell', 3]],
+        features: [
+            { name: 'Shell Fold', form: 'action', img: 'icons/creatures/fish/crab-blue-purple.webp',
+              text: '<p><strong>Mark a Stress</strong> to make an attack against a target within Melee range. On a success, the shell snaps shut on them: they take <strong>3d6+4</strong> physical damage and are Restrained until they break free with a Strength Roll.</p>',
+              act: { type: 'attack', range: 'melee', cost: { stress: 1 }, damage: '3d6+4', status: 'restrained' } },
+            { name: 'Crunchy Exterior', form: 'passive', img: 'icons/commodities/biological/shell-ridged-green.webp',
+              text: '<p>The @Lookup[@name] reduces physical damage from ranged attacks by <strong>3</strong>.</p>' }
+        ],
+        harvest: [I('Shellcrisp Claw', { savory: 2, salty: 1 }), I('Taco Shell Plate', { salty: 1, bitter: 1 }, 'It\'s brittle.')]
+    },
+    {
+        name: 'Milkshake Wyrm',
+        tier: 3, type: 'ranged', size: 'large',
+        img: 'icons/creatures/reptiles/snake-poised-white.webp',
+        description: 'A pale, creamy serpent that coils in frozen grottos. Its breath is so cold and sweet it stops the heart for a moment.',
+        motives: 'Chill, coil, slurp, freeze in place',
+        difficulty: 17, thresholds: [19, 30], hp: 6, stress: 6,
+        attack: { name: 'Frost Spit', range: 'far', bonus: 4, damage: '3d8+3', dtype: 'magical', img: 'icons/magic/water/barrier-ice-crystal-wall-faceted-light.webp' },
+        experiences: [['Cold Blooded', 3]],
+        features: [
+            { name: 'Brain Freeze', form: 'action', img: 'icons/magic/water/barrier-ice-crystal-wall-faceted-light.webp',
+              text: '<p><strong>Mark a Stress</strong>. All targets within Close range of a point within Far range must succeed on a Knowledge Reaction Roll or take <strong>3d6+3</strong> magic damage and mark a Stress as their head throbs.</p>',
+              act: { type: 'save', save: 'knowledge', range: 'far', cost: { stress: 1 }, damage: '3d6+3', dtype: 'magical', resource: { stress: 1 } } },
+            { name: 'Thick Shake', form: 'passive', img: 'icons/commodities/materials/slime-white.webp',
+              text: '<p>The ground within Very Close range of the @Lookup[@name] is slick with cream. Creatures there make Agility Rolls with disadvantage.</p>' }
+        ],
+        harvest: [I('Shake Gland', { sweet: 3 }, 'It must be prepared in a strange way.'), I('Wyrm Cream', { sweet: 2, salty: 1 })]
+    },
+    {
+        name: 'Deep Dish Behemoth',
+        tier: 3, type: 'solo', size: 'huge',
+        img: 'icons/creatures/mammals/beast-horned-scaled-glowing-orange.webp',
+        description: 'A molten-backed behemoth crusted in baked stone, trailing strings of scalding cheese-like ooze wherever it walks.',
+        motives: 'Smother, stretch, scald, wallow in lava',
+        difficulty: 18, thresholds: [20, 35], hp: 10, stress: 6,
+        attack: { name: 'Crusted Slam', range: 'veryClose', bonus: 5, damage: '3d10+2' },
+        experiences: [['Thick Crust', 3], ['Molten Core', 3]],
+        features: [
+            { std: 'relentless', n: 3 },
+            { name: 'Cheese Pull', form: 'action', img: 'icons/magic/nature/root-vine-entangled-humanoid.webp',
+              text: '<p><strong>Mark a Stress</strong> to fling strands of molten ooze at up to three targets within Close range. Each must succeed on an Agility Reaction Roll or take <strong>2d10+3</strong> magic damage and be Restrained.</p>',
+              act: { type: 'save', save: 'agility', range: 'close', cost: { stress: 1 }, damage: '2d10+3', dtype: 'magical', status: 'restrained' } },
+            { name: 'Extra Large', form: 'action', img: 'icons/magic/earth/barrier-stone-explosion-red.webp',
+              text: '<p><strong>Spend a Fear</strong> to slam down with the whole crust. All creatures within Very Close range must succeed on a Strength Reaction Roll or take <strong>4d10+4</strong> physical damage. Targets who succeed take half damage.</p>',
+              act: { type: 'save', save: 'strength', range: 'veryClose', cost: { fear: 1 }, damage: '4d10+4', half: true } },
+            { std: 'momentum' }
+        ],
+        harvest: [I('Behemoth Cheese Pull', { salty: 2, savory: 1 }), I('Stone Crust', { bitter: 1, salty: 1 }), I('Molten Core', { savory: 2, weird: 1 })]
+    },
+    {
+        name: 'Supersize Hydra',
+        tier: 4, type: 'solo', size: 'huge',
+        img: 'icons/creatures/reptiles/serpent-horned-green.webp',
+        description: 'A three-headed hydra: one crunches, one fries, one slurps. Cut off a head and the others order two more.',
+        motives: 'Devour, regrow, upsize, never be full',
+        difficulty: 20, thresholds: [35, 68], hp: 11, stress: 8,
+        attack: { name: 'Three-Headed Bite', range: 'close', bonus: 8, damage: '4d8+10' },
+        experiences: [['Bottomless Appetite', 4]],
+        features: [
+            { std: 'relentless', n: 3 },
+            { name: 'Combo Meal', form: 'action', img: 'icons/creatures/abilities/mouth-teeth-tongue-purple.webp',
+              text: '<p><strong>Spend a Fear</strong> to make a standard attack against up to three different targets within Close range, one per head.</p>',
+              act: { type: 'attack', range: 'close', cost: { fear: 1 }, damage: '4d8+10' } },
+            { name: 'Upsize', form: 'reaction', img: 'icons/magic/life/heart-cross-strong-flame-green.webp',
+              text: '<p>When the @Lookup[@name] takes Severe damage, a head falls off and two grow back. <strong>Mark a Stress</strong> to clear <strong>2</strong> HP.</p>',
+              act: { type: 'healing', cost: { stress: 1 }, heal: '2' } },
+            { name: 'Fryer Breath', form: 'action', img: 'icons/magic/fire/explosion-fireball-large-orange.webp',
+              text: '<p><strong>Mark a Stress</strong>. All targets in front of the @Lookup[@name] within Far range must succeed on an Agility Reaction Roll or take <strong>4d10+8</strong> magic damage. Targets who succeed take half damage.</p>',
+              act: { type: 'save', save: 'agility', range: 'far', cost: { stress: 1 }, damage: '4d10+8', dtype: 'magical', half: true } },
+            { std: 'terrifying' }
+        ],
+        harvest: [I('Hydra Crunch Head', { salty: 2, savory: 2 }), I('Hydra Fry Gland', { salty: 2, sour: 1 }), I('Hydra Slurp Tongue', { sweet: 2, weird: 1 })]
+    },
+
+    /* ================================================================== */
+    /*  ROUND TWO: COMFORT FOOD                                           */
+    /* ================================================================== */
+    {
+        name: 'Dumpling Toad',
+        tier: 1, type: 'standard', size: 'small',
+        img: 'icons/creatures/amphibians/bullfrog-glowing-green.webp',
+        description: 'A soft, pale toad that puffs itself up with warm steam until it looks exactly like a fresh dumpling.',
+        motives: 'Puff up, bounce, steam, hide among stones',
+        difficulty: 12, thresholds: [5, 10], hp: 4, stress: 3,
+        attack: { name: 'Sticky Tongue', range: 'veryClose', bonus: 1, damage: '1d8+1' },
+        experiences: [['Look Delicious', 2]],
+        features: [
+            { name: 'Steam Puff', form: 'reaction', img: 'icons/magic/air/fog-gas-smoke-swirling-gray.webp',
+              text: '<p>When the @Lookup[@name] takes damage, they release a cloud of steam. Until the end of the next GM turn, attacks against creatures within Very Close range of them are made with disadvantage.</p>' },
+            { name: 'Bounce', form: 'action', img: 'icons/creatures/amphibians/frog-water-teal.webp',
+              text: '<p><strong>Mark a Stress</strong> to leap to a point within Far range and make a standard attack against a target there.</p>',
+              act: { type: 'attack', range: 'far', cost: { stress: 1 }, damage: '1d8+1' } }
+        ],
+        harvest: [I('Dumpling Skin', { savory: 1, salty: 1 }, 'It\'s particularly tender.')]
+    },
+    {
+        name: 'Mac \'n\' Moss Mound',
+        tier: 1, type: 'bruiser', size: 'large',
+        img: 'icons/magic/nature/tree-animated-stump-mushrooms-teal.webp',
+        description: 'A heap of curly orange moss and bubbling cheese-mold that heaves itself across the cave floor, absorbing whatever it rolls over.',
+        motives: 'Smother, absorb, ooze, keep growing',
+        difficulty: 13, thresholds: [8, 15], hp: 6, stress: 3,
+        attack: { name: 'Gooey Slam', range: 'melee', bonus: 1, damage: '1d10+3' },
+        experiences: [['Comfortably Heavy', 2]],
+        features: [
+            { std: 'slow' },
+            { name: 'Smother', form: 'action', img: 'icons/commodities/materials/slime-thick-orange.webp',
+              text: '<p><strong>Mark a Stress</strong> to make an attack against a target within Melee range. On a success, the target is Restrained under the @Lookup[@name] and takes <strong>1d6+2</strong> physical damage at the start of each GM turn until freed.</p>',
+              act: { type: 'attack', range: 'melee', cost: { stress: 1 }, damage: '1d6+2', status: 'restrained' } },
+            { name: 'Food Coma', form: 'reaction', img: 'icons/magic/control/sleep-bubble-purple.webp',
+              text: '<p>When a PC eats while within Close range of the @Lookup[@name], they must succeed on an Instinct Reaction Roll or become drowsy (Vulnerable) until the end of the scene.</p>',
+              act: { type: 'save', save: 'instinct', range: 'close', status: 'vulnerable' } }
+        ],
+        harvest: [I('Cheddar Moss', { salty: 2, bitter: 1 }), I('Curly Noodle Moss', { savory: 1, salty: 1 })]
+    },
+    {
+        name: 'Cocoa Bats',
+        tier: 2, type: 'horde', size: 'small',
+        img: 'icons/creatures/mammals/bats-movement-flying-black.webp',
+        description: 'A flutter of warm, brown bats that smell of chocolate and nest above the hot springs. Their bites are scalding.',
+        motives: 'Swoop, scald, blind with steam, roost in warm places',
+        difficulty: 14, thresholds: [10, 20], hp: 5, stress: 3,
+        attack: { name: 'Scalding Bites', range: 'veryClose', bonus: 0, damage: '2d6+3' },
+        hordeDamage: '1d6+2', hordeHP: 2,
+        experiences: [['Echolocation', 3]],
+        features: [
+            { std: 'flying' },
+            { name: 'Marshmallow Cloud', form: 'action', img: 'icons/magic/air/fog-gas-smoke-swirling-gray.webp',
+              text: '<p><strong>Mark a Stress</strong> to fill the area within Close range with sweet steam. Creatures inside are Hidden from anyone outside it until the end of the next GM turn.</p>',
+              act: { type: 'effect', range: 'close', cost: { stress: 1 } } }
+        ],
+        harvest: [I('Cocoa Wing', { sweet: 1, bitter: 1 })]
+    },
+    {
+        name: 'Casserole Crawler',
+        tier: 2, type: 'bruiser', size: 'large',
+        img: 'icons/creatures/invertebrates/centipede-brown.webp',
+        description: 'A broad, many-legged crawler built in layers like a baked dish, with a crisp top shell and a soft, steaming underbelly.',
+        motives: 'Crawl over, layer up, bake in the heat, protect the nest',
+        difficulty: 15, thresholds: [14, 28], hp: 7, stress: 3,
+        attack: { name: 'Layered Mandibles', range: 'melee', bonus: 2, damage: '2d10+3' },
+        experiences: [['Layered Defenses', 2]],
+        features: [
+            { name: 'Crispy Top', form: 'passive', img: 'icons/commodities/biological/shell-ridged-green.webp',
+              text: '<p>Attacks against the @Lookup[@name] from the front deal <strong>2</strong> less damage. A PC who succeeds on an Agility Roll to get underneath ignores this.</p>' },
+            { name: 'Crawl Over', form: 'action', img: 'icons/creatures/invertebrates/centipede-brown.webp',
+              text: '<p><strong>Mark a Stress</strong> to crawl over everyone within Very Close range. Each must succeed on a Strength Reaction Roll or take <strong>2d8+3</strong> physical damage and be Vulnerable until they next act.</p>',
+              act: { type: 'save', save: 'strength', range: 'veryClose', cost: { stress: 1 }, damage: '2d8+3', status: 'vulnerable' } },
+            { std: 'momentum' }
+        ],
+        harvest: [I('Casserole Layer', { savory: 2, salty: 1 }), I('Crawler Underbelly', { sweet: 1, savory: 1 })]
+    },
+    {
+        name: 'Granny Gruel',
+        tier: 2, type: 'social', size: 'medium',
+        img: 'icons/tools/cooking/soup-ladle.webp',
+        description: 'A tiny, ancient cook with a bottomless pot of porridge. She insists everyone eat, and those who do rarely want to leave.',
+        motives: 'Feed everyone, keep guests forever, gossip, judge manners',
+        difficulty: 14, thresholds: [8, 16], hp: 4, stress: 4,
+        attack: { name: 'Wooden Ladle', range: 'melee', bonus: -2, damage: '1d6+3' },
+        experiences: [['Knows Everyone\'s Business', 3], ['Old Cave Lore', 3]],
+        features: [
+            { name: 'Have Another Bowl', form: 'action', img: 'icons/tools/cooking/bowl-steaming-brown.webp',
+              text: '<p><strong>Mark a Stress</strong> to offer a bowl to a PC within Close range. If they eat, they clear <strong>2</strong> Stress but must succeed on a Presence Reaction Roll or be unwilling to leave her company until the end of the scene.</p>',
+              act: { type: 'save', save: 'presence', range: 'close', cost: { stress: 1 } } },
+            { name: 'Nobody Leaves Hungry', form: 'reaction', img: 'icons/magic/control/hypnosis-mesmerism-swirl.webp',
+              text: '<p>When a PC within Close range refuses her food, they must succeed on a Presence Reaction Roll or lose a Hope as guilt sets in.</p>',
+              act: { type: 'save', save: 'presence', range: 'close', resource: { hope: 1 } } }
+        ],
+        harvest: [I('Bottomless Porridge', { sweet: 1, savory: 1, bitter: 1 }, 'It smells unbelievably good.')]
+    },
+    {
+        name: 'Ramen Kraken',
+        tier: 3, type: 'bruiser', size: 'huge',
+        img: 'icons/creatures/fish/squid-kraken-teal.webp',
+        description: 'A kraken that lurks in hot broth springs, its tentacles long, pale and wavy as noodles.',
+        motives: 'Slurp, entangle, drag into the broth, simmer',
+        difficulty: 17, thresholds: [22, 40], hp: 7, stress: 4,
+        attack: { name: 'Noodle Lash', range: 'close', bonus: 3, damage: '3d10+1' },
+        experiences: [['Broth Ambush', 3]],
+        features: [
+            { name: 'Slurp', form: 'action', img: 'icons/creatures/tentacles/tentacles-octopus-black-pink.webp',
+              text: '<p><strong>Mark a Stress</strong> to make an attack against a target within Close range. On a success, the target is pulled into Melee range, Restrained, and takes <strong>3d8+2</strong> physical damage.</p>',
+              act: { type: 'attack', range: 'close', cost: { stress: 1 }, damage: '3d8+2', status: 'restrained' } },
+            { name: 'Hot Broth', form: 'passive', img: 'icons/tools/cooking/bowl-steaming-brown.webp',
+              text: '<p>Creatures Restrained by the @Lookup[@name] take <strong>1d10</strong> magic damage at the start of each GM turn.</p>' },
+            { std: 'relentless', n: 2 }
+        ],
+        harvest: [I('Kraken Noodle', { savory: 2, salty: 1 }), I('Broth Ink', { salty: 1, weird: 1 })]
+    },
+    {
+        name: 'Tater Tot Legion',
+        tier: 3, type: 'horde', size: 'small',
+        img: 'icons/creatures/invertebrates/bug-sixlegged-gray.webp',
+        description: 'Hundreds of crunchy, barrel-shaped beetles that march in tight formation and roll into anyone who stands still.',
+        motives: 'March, roll, overwhelm, form ranks',
+        difficulty: 15, thresholds: [16, 31], hp: 8, stress: 3,
+        attack: { name: 'Rolling Crunch', range: 'veryClose', bonus: 1, damage: '3d6+7' },
+        hordeDamage: '2d6+4', hordeHP: 2,
+        experiences: [['Strength in Numbers', 3]],
+        features: [
+            { name: 'Form Ranks', form: 'action', img: 'icons/creatures/invertebrates/bug-sixlegged-gray.webp',
+              text: '<p><strong>Mark a Stress</strong>. Until the end of the next GM turn, the @Lookup[@name] reduce all damage they take by <strong>4</strong>.</p>',
+              act: { type: 'effect', cost: { stress: 1 } } },
+            { name: 'Overflowing', form: 'reaction', img: 'icons/magic/earth/projectile-stone-boulder-brown.webp',
+              text: '<p>When the @Lookup[@name] succeed on a standard attack, the target is knocked down and Vulnerable until they next act.</p>' }
+        ],
+        harvest: [I('Tater Tot Beetle', { salty: 2, savory: 1 }, 'It\'s brittle.')]
+    },
+    {
+        name: 'Hearthfire Matron',
+        tier: 4, type: 'support', size: 'large',
+        img: 'icons/creatures/magical/spirit-fire-orange.webp',
+        description: 'The spirit of an endless kitchen fire, wearing the shape of a smiling cook. Her warmth heals her allies and lulls her enemies to sleep.',
+        motives: 'Nourish allies, lull enemies, tend the fire, never let it go out',
+        difficulty: 19, thresholds: [27, 45], hp: 5, stress: 5,
+        attack: { name: 'Ember Ladle', range: 'close', bonus: 5, damage: '4d6+10', dtype: 'magical' },
+        experiences: [['Heart of the Hearth', 4]],
+        features: [
+            { name: 'Soup\'s On', form: 'action', img: 'icons/tools/cooking/bowl-steaming-brown.webp',
+              text: '<p><strong>Mark a Stress</strong>. All allies within Far range clear <strong>2</strong> HP and their next attack deals an extra <strong>1d8</strong> damage.</p>',
+              act: { type: 'healing', range: 'far', cost: { stress: 1 }, heal: '2' } },
+            { name: 'Like Coming Home', form: 'action', img: 'icons/magic/control/sleep-bubble-purple.webp',
+              text: '<p><strong>Spend a Fear</strong>. All PCs within Close range must succeed on an Instinct Reaction Roll or fall into a warm, nostalgic doze: they are Vulnerable and can\'t act until they take damage or an ally spends an action to rouse them.</p>',
+              act: { type: 'save', save: 'instinct', range: 'close', cost: { fear: 1 }, status: 'vulnerable' } },
+            { name: 'Eternal Flame', form: 'reaction', img: 'icons/magic/fire/flame-burning-campfire-orange.webp',
+              text: '<p>When the @Lookup[@name] is defeated while a fire burns within Far range, <strong>spend a Fear</strong> to have her reform from it at the end of the next GM turn with <strong>2</strong> HP cleared.</p>',
+              act: { type: 'healing', cost: { fear: 1 }, heal: '2' } }
+        ],
+        harvest: [I('Hearth Ember', { sweet: 1, savory: 1, weird: 1 }), I('Matron\'s Ladle Ash', { bitter: 2, weird: 1 })]
+    },
+    {
+        name: 'Mac and Cheese Colossus',
+        tier: 4, type: 'bruiser', size: 'huge',
+        img: 'icons/creatures/magical/construct-stone-earth-gray.webp',
+        description: 'A towering colossus of baked stone and molten, golden goo that rises from the deepest kitchens of the Hadral.',
+        motives: 'Engulf, crush, harden, spread comfort and ruin',
+        difficulty: 20, thresholds: [40, 70], hp: 8, stress: 5,
+        attack: { name: 'Molten Fist', range: 'veryClose', bonus: 4, damage: '4d10+10' },
+        experiences: [['Unstoppable Comfort', 3]],
+        features: [
+            { name: 'Golden Crust', form: 'passive', img: 'icons/magic/earth/strike-body-stone-crumble.webp',
+              text: '<p>The @Lookup[@name] is resistant to physical damage.</p>' },
+            { name: 'Cheese Flood', form: 'action', img: 'icons/commodities/materials/slime-thick-orange.webp',
+              text: '<p><strong>Spend a Fear</strong> to burst open. All creatures within Close range must succeed on an Agility Reaction Roll or take <strong>4d8+8</strong> magic damage and be Restrained as the goo hardens. Targets who succeed take half damage and aren\'t Restrained.</p>',
+              act: { type: 'save', save: 'agility', range: 'close', cost: { fear: 1 }, damage: '4d8+8', dtype: 'magical', half: true, status: 'restrained' } },
+            { std: 'relentless', n: 2 }
+        ],
+        resist: 'physical',
+        harvest: [I('Colossus Crust', { salty: 2, bitter: 1 }), I('Golden Goo', { salty: 2, savory: 2 })]
     }
 ];
