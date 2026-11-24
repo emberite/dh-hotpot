@@ -1,6 +1,7 @@
 import { FLAVORS, FLAVOR_KEYS, MODULE_ID, dieSVG, flavorLabel, tokenSVG } from './flavors.mjs';
 import { CookSession, autoSplit, buildDice, detectFeatures, profileKey, profileOf } from './cooking.mjs';
 import { broadcast, run } from './relay.mjs';
+import { postMealCard } from './chat.mjs';
 
 const { HandlebarsApplicationMixin, ApplicationV2 } = foundry.applications.api;
 const DEFAULT_IMG = 'systems/daggerheart/assets/icons/documents/items/open-treasure-chest.svg';
@@ -981,22 +982,7 @@ export class HotpotKitchen extends HandlebarsApplicationMixin(ApplicationV2) {
     }
 
     async #postChat() {
-        const sv = this.served;
-        const out = sv.outcome;
-        const content = await foundry.applications.handlebars.renderTemplate(`modules/${MODULE_ID}/templates/chat-card.hbs`, {
-            ...sv,
-            date: null,
-            fullClear: out.fullClear,
-            deathMove: out.deathMove,
-            noStress: out.noStress,
-            builtForSpeed: out.builtForSpeed,
-            lastDrop: out.lastDrop
-        });
-        await ChatMessage.create({
-            content,
-            speaker: ChatMessage.getSpeaker({ alias: L('ChatSpeaker') }),
-            flags: { [MODULE_ID]: { recipe: sv.id } }
-        });
+        await postMealCard(this.served);
     }
 
     static async #onReset() {

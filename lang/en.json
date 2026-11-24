@@ -261,6 +261,12 @@
     },
     "Gear": {
       "FilterLabel": "Campaign Frame"
+    },
+    "Chat": {
+      "Served": "A feast is served",
+      "Rating": "Meal rating",
+      "Recorded": "Recorded in the party cookbook",
+      "CookedBy": "cooked by {name}"
     }
   }
 }

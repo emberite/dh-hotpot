@@ -1,30 +1,60 @@
 <div class="dh-hotpot-card">
-  <header>
-    <i class="fa-solid fa-bowl-food"></i>
-    <div>
+  <header class="hp-cc-banner{{#if art}} has-art{{/if}}"{{#if art}} style="--hp-cc-art: url('{{art}}')"{{/if}}>
+    <div class="hp-cc-titles">
+      <span class="hp-cc-kicker"><i class="fa-solid fa-bowl-food"></i> {{localize "DHHOTPOT.Chat.Served"}}</span>
       <h3>{{name}}</h3>
-      <span class="hp-cc-dice">{{dice}}</span>
+      {{#if description}}<p class="hp-cc-desc">{{description}}</p>{{/if}}
     </div>
-    <span class="hp-cc-rating" data-tooltip="{{localize "DHHOTPOT.Cook.Rating"}}"><b>{{rating}}</b></span>
+    <div class="hp-cc-rating" data-tooltip="{{localize "DHHOTPOT.Cook.Rating"}}">
+      <b>{{rating}}</b><small>{{localize "DHHOTPOT.Chat.Rating"}}</small>
+    </div>
   </header>
-  {{#if description}}<p class="hp-cc-desc">{{description}}</p>{{/if}}
-  <div class="hp-cc-ings">{{#each ingredients}}<img src="{{img}}" alt="{{name}}" data-tooltip="{{name}}">{{/each}}</div>
-  {{#if sets.length}}<div class="hp-cc-sets">{{#each sets}}<span>{{this}}</span>{{/each}}{{#if lastDrop}}<span class="ld">+{{lastDrop}}</span>{{/if}}</div>{{/if}}
-  {{#if familiarName}}<p class="hp-cc-note"><i class="fa-solid fa-book-bookmark"></i> {{localize "DHHOTPOT.Recipe.Familiar" name=familiarName}}</p>{{/if}}
-  {{#if noStress}}<p class="hp-cc-note"><i class="fa-solid fa-pepper-hot"></i> {{localize "DHHOTPOT.Serve.Spicy"}}</p>{{/if}}
-  {{#if fullClear}}<p class="hp-cc-note good"><i class="fa-solid fa-wand-magic-sparkles"></i> {{localize "DHHOTPOT.Serve.Risky"}}</p>{{/if}}
-  {{#if deathMove}}<p class="hp-cc-note bad"><i class="fa-solid fa-skull"></i> {{localize "DHHOTPOT.Serve.Death"}}</p>{{/if}}
-  {{#if builtForSpeed}}<p class="hp-cc-note"><i class="fa-solid fa-person-running"></i> {{localize "DHHOTPOT.Serve.Speed"}}</p>{{/if}}
-  <ul class="hp-cc-diners">
-    {{#each diners}}
-    <li>
-      <img src="{{img}}" alt=""><span>{{name}}</span>
-      {{#if @root.fullClear}}<em class="hope">{{localize "DHHOTPOT.Done.FullClear"}}</em>{{else}}
-      {{#if hp}}<em class="hp"><i class="fa-solid fa-heart"></i> −{{hp}}</em>{{/if}}
-      {{#if stress}}<em class="stress"><i class="fa-solid fa-bolt"></i> −{{stress}}</em>{{/if}}
-      {{#if hope}}<em class="hope"><i class="fa-solid fa-sun"></i> +{{hope}}</em>{{/if}}
-      {{/if}}
-    </li>
-    {{/each}}
-  </ul>
+
+  <div class="hp-cc-body">
+    {{#if bar.length}}
+    <div class="hp-cc-bar" data-tooltip="{{dice}}">
+      {{#each bar}}<span style="width: {{pct}}%; --c: {{color}}" data-tooltip="{{label}} ×{{n}}"></span>{{/each}}
+    </div>
+    {{/if}}
+
+    <div class="hp-cc-ings">
+      {{#each ingredients}}<img src="{{img}}" alt="{{name}}" data-tooltip="{{name}}">{{/each}}
+    </div>
+
+    {{#if sets.length}}
+    <div class="hp-cc-sets">
+      {{#each sets}}<span class="hp-cc-set">{{value}}</span>{{/each}}
+      {{#if lastDrop}}<span class="hp-cc-set ld" data-tooltip="{{localize "DHHOTPOT.Cook.LastDrop"}}">+{{lastDrop}}</span>{{/if}}
+      <span class="hp-cc-eq">= {{rating}}</span>
+    </div>
+    {{/if}}
+
+    {{#if familiarName}}<p class="hp-cc-note"><i class="fa-solid fa-book-bookmark"></i> {{localize "DHHOTPOT.Recipe.Familiar" name=familiarName}}</p>{{/if}}
+    {{#if noStress}}<p class="hp-cc-note spicy"><i class="fa-solid fa-pepper-hot"></i> {{localize "DHHOTPOT.Serve.Spicy"}}</p>{{/if}}
+    {{#if fullClear}}<p class="hp-cc-note good"><i class="fa-solid fa-wand-magic-sparkles"></i> {{localize "DHHOTPOT.Serve.Risky"}}</p>{{/if}}
+    {{#if deathMove}}<p class="hp-cc-note bad"><i class="fa-solid fa-skull"></i> {{localize "DHHOTPOT.Serve.Death"}}</p>{{/if}}
+    {{#if builtForSpeed}}<p class="hp-cc-note"><i class="fa-solid fa-person-running"></i> {{localize "DHHOTPOT.Serve.Speed"}}</p>{{/if}}
+
+    {{#if diners.length}}
+    <ul class="hp-cc-diners">
+      {{#each diners}}
+      <li>
+        <img src="{{img}}" alt="">
+        <span class="hp-cc-name">{{name}}</span>
+        <span class="hp-cc-tags">
+          {{#if @root.fullClear}}<em class="hope"><i class="fa-solid fa-wand-magic-sparkles"></i> {{localize "DHHOTPOT.Done.FullClear"}}</em>{{else}}
+          {{#if hp}}<em class="hp" data-tooltip="{{localize "DHHOTPOT.Res.hp"}}"><i class="fa-solid fa-heart"></i> −{{hp}}</em>{{/if}}
+          {{#if stress}}<em class="stress" data-tooltip="{{localize "DHHOTPOT.Res.stress"}}"><i class="fa-solid fa-bolt"></i> −{{stress}}</em>{{/if}}
+          {{#if hope}}<em class="hope" data-tooltip="{{localize "DHHOTPOT.Res.hope"}}"><i class="fa-solid fa-sun"></i> +{{hope}}</em>{{/if}}
+          {{/if}}
+        </span>
+      </li>
+      {{/each}}
+    </ul>
+    {{/if}}
+  </div>
+
+  <footer class="hp-cc-foot">
+    <i class="fa-solid fa-book-open"></i> {{localize "DHHOTPOT.Chat.Recorded"}}{{#if cook}} · {{localize "DHHOTPOT.Chat.CookedBy" name=cook}}{{/if}}
+  </footer>
 </div>

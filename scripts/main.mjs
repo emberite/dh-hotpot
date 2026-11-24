@@ -4,6 +4,7 @@ import { IngredientForge } from './generator.mjs';
 import { CookSession, buildDice, profileKey, profileOf } from './cooking.mjs';
 import { listen, registerRelay } from './relay.mjs';
 import { registerFrameGear } from './frame-gear.mjs';
+import { registerChatStyling } from './chat.mjs';
 import { liftHotpotFolder, placeLarder } from './larder.mjs';
 
 let kitchen = null;
@@ -95,6 +96,7 @@ Hooks.once('init', () => {
 });
 
 Hooks.once('setup', () => registerFrameGear());
+registerChatStyling();
 
 /** Beast Feast replaces rest downtime with Make a Feast: hide the rest buttons on character and party sheets. */
 function toggleRestButtons(hidden = game.settings.get(MODULE_ID, 'hideRestButtons')) {
