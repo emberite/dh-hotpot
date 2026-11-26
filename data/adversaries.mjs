@@ -119,7 +119,7 @@ export const ADVERSARIES = [
         features: [
             { std: 'relentless', n: 2 },
             { name: 'Swallow Whole', form: 'action', img: 'icons/creatures/abilities/mouth-teeth-tongue-purple.webp',
-              text: '<p><strong>Spend a Fear</strong> to make an attack against a target within Melee range. On a success, the target is swallowed: they are Restrained, take <strong>1d6</strong> physical damage at the start of each GM turn, and can only attack the @Lookup[@name]. When the @Lookup[@name] takes Severe damage, they spit everyone out.</p>',
+              text: '<p><strong>Spend a Fear</strong> to make an attack against a target within Melee range. On a success, the target is swallowed: they are Restrained, take <strong>1d6</strong> physical damage each time the @Lookup[@name] is spotlighted, and can only attack the @Lookup[@name]. When the @Lookup[@name] takes Severe damage, they spit everyone out.</p>',
               act: { type: 'attack', range: 'melee', cost: { fear: 1 }, damage: '1d6', status: 'restrained' } },
             { name: 'Indigestion', form: 'reaction', img: 'icons/magic/acid/dissolve-bone-white.webp',
               text: '<p>When the @Lookup[@name] marks their last Stress, they belch a cloud of foul air. All creatures within Very Close range must succeed on a Strength Reaction Roll or mark a Stress.</p>',
@@ -241,7 +241,7 @@ export const ADVERSARIES = [
         experiences: [['Pranksters', 3]],
         features: [
             { name: 'Over-Seasoned', form: 'reaction', img: 'icons/magic/fire/projectile-fireball-orange.webp',
-              text: '<p>When the @Lookup[@name] succeed on a standard attack, the target catches a spark. At the start of their next turn, they take <strong>1d6</strong> magic damage unless they spend their action patting it out.</p>',
+              text: '<p>When the @Lookup[@name] succeed on a standard attack, the target catches a spark. The next time they act, they take <strong>1d6</strong> magic damage unless they use that action to pat it out.</p>',
               act: { type: 'damage', damage: '1d6', dtype: 'magical' } }
         ],
         harvest: [I('Pepperjack Ember', { sour: 1, savory: 1 }, 'It\'s emitting a colorful gas.')]
@@ -305,7 +305,7 @@ export const ADVERSARIES = [
               text: '<p><strong>Spend a Fear</strong> to exhale acid in front of the @Lookup[@name]. All targets within Close range must succeed on an Agility Reaction Roll or take <strong>3d10+4</strong> physical damage and mark an Armor Slot without its benefits. Targets who succeed take half damage.</p>',
               act: { type: 'save', save: 'agility', range: 'close', cost: { fear: 1 }, damage: '3d10+4', half: true } },
             { name: 'Drool Pools', form: 'passive', img: 'icons/magic/acid/dissolve-pool-bubbles.webp',
-              text: '<p>The ground within Very Close range of the @Lookup[@name] is covered in acid. Creatures other than the @Lookup[@name] who start their turn there take <strong>1d10</strong> physical damage.</p>' },
+              text: '<p>The ground within Very Close range of the @Lookup[@name] is covered in acid. Creatures other than the @Lookup[@name] who enter the acid or act within it take <strong>1d10</strong> physical damage.</p>' },
             { std: 'terrifying' }
         ],
         harvest: [I('Acid Dragon Saliva', { sour: 2 }), I('Dragon Brisket', { savory: 3, weird: 1 })]
@@ -422,7 +422,7 @@ export const ADVERSARIES = [
               text: '<p><strong>Spend a Fear</strong> to heave the Stew Sea. All creatures within Far range must succeed on a Strength Reaction Roll or take <strong>4d8+8</strong> magic damage and be swept to a point within Close range of the @Lookup[@name]. Targets who succeed take half damage.</p>',
               act: { type: 'save', save: 'strength', range: 'far', cost: { fear: 1 }, damage: '4d8+8', dtype: 'magical', half: true } },
             { name: 'Into the Pot', form: 'action', img: 'icons/creatures/tentacles/tentacles-octopus-black-pink.webp',
-              text: '<p><strong>Mark a Stress</strong> to make an attack against a target within Close range. On a success, the target is Restrained and dragged beneath the surface; they take <strong>2d10</strong> magic damage at the start of each GM turn until freed.</p>',
+              text: '<p><strong>Mark a Stress</strong> to make an attack against a target within Close range. On a success, the target is Restrained and dragged beneath the surface; they take <strong>2d10</strong> magic damage each time the @Lookup[@name] is spotlighted until freed.</p>',
               act: { type: 'attack', range: 'close', cost: { stress: 1 }, damage: '2d10', dtype: 'magical', status: 'restrained' } },
             { std: 'terrifying' }
         ],
@@ -465,7 +465,7 @@ export const ADVERSARIES = [
               text: '<p><strong>Mark a Stress</strong> to make an attack against all targets in a line within Far range. Targets the @Lookup[@name] succeeds against are pulled into Melee range and Restrained.</p>',
               act: { type: 'attack', range: 'far', cost: { stress: 1 }, status: 'restrained' } },
             { name: 'Digestive Coating', form: 'passive', img: 'icons/magic/acid/dissolve-drip-droplet-smoke.webp',
-              text: '<p>While Restrained by the @Lookup[@name], a creature takes <strong>2d10</strong> magic damage at the start of each GM turn.</p>' },
+              text: '<p>While Restrained by the @Lookup[@name], a creature takes <strong>2d10</strong> magic damage each time the @Lookup[@name] is spotlighted.</p>' },
             { std: 'relentless', n: 2 }
         ],
         harvest: [I('Obelick Papillae', { sour: 2, weird: 1 }), I('Horror Tongue Steak', { savory: 3, sour: 1 })]
@@ -485,7 +485,7 @@ export const ADVERSARIES = [
               text: '<p><strong>Mark a Stress</strong>. All targets within Close range of a point within Far range must succeed on an Agility Reaction Roll or take <strong>4d6+6</strong> magic damage. Targets who succeed take half damage.</p>',
               act: { type: 'save', save: 'agility', range: 'far', cost: { stress: 1 }, damage: '4d6+6', dtype: 'magical', half: true } },
             { name: 'From the Ashes', form: 'reaction', img: 'icons/magic/fire/flame-burning-fist-strike.webp',
-              text: '<p>The first time the @Lookup[@name] is defeated, <strong>spend a Fear</strong> to have them rise again at the end of the next GM turn with half their HP cleared.</p>',
+              text: '<p>The first time the @Lookup[@name] is defeated, <strong>spend a Fear</strong> to have them rise again the next time you spotlight an adversary, with half their HP cleared.</p>',
               act: { type: 'healing', cost: { fear: 1 }, heal: '2' } }
         ],
         harvest: [I('Saffron Ash', { bitter: 1, weird: 2 }, 'It must be prepared in a strange way.'), I('Phoenix Drumstick', { savory: 2, sweet: 1 })]
@@ -656,7 +656,7 @@ export const ADVERSARIES = [
         experiences: [['Sticky Situation', 2]],
         features: [
             { name: 'Sticky Syrup', form: 'reaction', img: 'icons/commodities/materials/slime-thick-orange.webp',
-              text: '<p>When the @Lookup[@name] succeeds on a standard attack, the target is coated in syrup and can\'t move farther than Very Close range on their next turn.</p>' },
+              text: '<p>When the @Lookup[@name] succeeds on a standard attack, the target is coated in syrup and can\'t move farther than Very Close range the next time they act.</p>' },
             { name: 'Shaken Up', form: 'reaction', img: 'icons/magic/water/wave-water-blue.webp',
               text: '<p>When the @Lookup[@name] takes Major or greater damage, they burst. All creatures within Close range must succeed on a Finesse Reaction Roll or take <strong>2d6+2</strong> physical damage.</p>',
               act: { type: 'save', save: 'finesse', range: 'close', damage: '2d6+2' } }
@@ -759,7 +759,7 @@ export const ADVERSARIES = [
         experiences: [['Look Delicious', 2]],
         features: [
             { name: 'Steam Puff', form: 'reaction', img: 'icons/magic/air/fog-gas-smoke-swirling-gray.webp',
-              text: '<p>When the @Lookup[@name] takes damage, they release a cloud of steam. Until the end of the next GM turn, attacks against creatures within Very Close range of them are made with disadvantage.</p>' },
+              text: '<p>When the @Lookup[@name] takes damage, they release a cloud of steam. Until the @Lookup[@name] is next spotlighted, attacks against creatures within Very Close range of them are made with disadvantage.</p>' },
             { name: 'Bounce', form: 'action', img: 'icons/creatures/amphibians/frog-water-teal.webp',
               text: '<p><strong>Mark a Stress</strong> to leap to a point within Far range and make a standard attack against a target there.</p>',
               act: { type: 'attack', range: 'far', cost: { stress: 1 }, damage: '1d8+1' } }
@@ -778,7 +778,7 @@ export const ADVERSARIES = [
         features: [
             { std: 'slow' },
             { name: 'Smother', form: 'action', img: 'icons/commodities/materials/slime-thick-orange.webp',
-              text: '<p><strong>Mark a Stress</strong> to make an attack against a target within Melee range. On a success, the target is Restrained under the @Lookup[@name] and takes <strong>1d6+2</strong> physical damage at the start of each GM turn until freed.</p>',
+              text: '<p><strong>Mark a Stress</strong> to make an attack against a target within Melee range. On a success, the target is Restrained under the @Lookup[@name] and takes <strong>1d6+2</strong> physical damage each time the @Lookup[@name] is spotlighted until freed.</p>',
               act: { type: 'attack', range: 'melee', cost: { stress: 1 }, damage: '1d6+2', status: 'restrained' } },
             { name: 'Food Coma', form: 'reaction', img: 'icons/magic/control/sleep-bubble-purple.webp',
               text: '<p>When a PC eats while within Close range of the @Lookup[@name], they must succeed on an Instinct Reaction Roll or become drowsy (Vulnerable) until the end of the scene.</p>',
@@ -799,7 +799,7 @@ export const ADVERSARIES = [
         features: [
             { std: 'flying' },
             { name: 'Marshmallow Cloud', form: 'action', img: 'icons/magic/air/fog-gas-smoke-swirling-gray.webp',
-              text: '<p><strong>Mark a Stress</strong> to fill the area within Close range with sweet steam. Creatures inside are Hidden from anyone outside it until the end of the next GM turn.</p>',
+              text: '<p><strong>Mark a Stress</strong> to fill the area within Close range with sweet steam. Creatures inside are Hidden from anyone outside it until the @Lookup[@name] are next spotlighted.</p>',
               act: { type: 'effect', range: 'close', cost: { stress: 1 } } }
         ],
         harvest: [I('Cocoa Wing', { sweet: 1, bitter: 1 })]
@@ -856,7 +856,7 @@ export const ADVERSARIES = [
               text: '<p><strong>Mark a Stress</strong> to make an attack against a target within Close range. On a success, the target is pulled into Melee range, Restrained, and takes <strong>3d8+2</strong> physical damage.</p>',
               act: { type: 'attack', range: 'close', cost: { stress: 1 }, damage: '3d8+2', status: 'restrained' } },
             { name: 'Hot Broth', form: 'passive', img: 'icons/tools/cooking/bowl-steaming-brown.webp',
-              text: '<p>Creatures Restrained by the @Lookup[@name] take <strong>1d10</strong> magic damage at the start of each GM turn.</p>' },
+              text: '<p>Creatures Restrained by the @Lookup[@name] take <strong>1d10</strong> magic damage each time the @Lookup[@name] is spotlighted.</p>' },
             { std: 'relentless', n: 2 }
         ],
         harvest: [I('Kraken Noodle', { savory: 2, salty: 1 }), I('Broth Ink', { salty: 1, weird: 1 })]
@@ -873,7 +873,7 @@ export const ADVERSARIES = [
         experiences: [['Strength in Numbers', 3]],
         features: [
             { name: 'Form Ranks', form: 'action', img: 'icons/creatures/invertebrates/bug-sixlegged-gray.webp',
-              text: '<p><strong>Mark a Stress</strong>. Until the end of the next GM turn, the @Lookup[@name] reduce all damage they take by <strong>4</strong>.</p>',
+              text: '<p><strong>Mark a Stress</strong>. Until the @Lookup[@name] are next spotlighted, they reduce all damage they take by <strong>4</strong>.</p>',
               act: { type: 'effect', cost: { stress: 1 } } },
             { name: 'Overflowing', form: 'reaction', img: 'icons/magic/earth/projectile-stone-boulder-brown.webp',
               text: '<p>When the @Lookup[@name] succeed on a standard attack, the target is knocked down and Vulnerable until they next act.</p>' }
@@ -897,7 +897,7 @@ export const ADVERSARIES = [
               text: '<p><strong>Spend a Fear</strong>. All PCs within Close range must succeed on an Instinct Reaction Roll or fall into a warm, nostalgic doze: they are Vulnerable and can\'t act until they take damage or an ally spends an action to rouse them.</p>',
               act: { type: 'save', save: 'instinct', range: 'close', cost: { fear: 1 }, status: 'vulnerable' } },
             { name: 'Eternal Flame', form: 'reaction', img: 'icons/magic/fire/flame-burning-campfire-orange.webp',
-              text: '<p>When the @Lookup[@name] is defeated while a fire burns within Far range, <strong>spend a Fear</strong> to have her reform from it at the end of the next GM turn with <strong>2</strong> HP cleared.</p>',
+              text: '<p>When the @Lookup[@name] is defeated while a fire burns within Far range, <strong>spend a Fear</strong> to have her reform from it the next time you spotlight an adversary, with <strong>2</strong> HP cleared.</p>',
               act: { type: 'healing', cost: { fear: 1 }, heal: '2' } }
         ],
         harvest: [I('Hearth Ember', { sweet: 1, savory: 1, weird: 1 }), I('Matron\'s Ladle Ash', { bitter: 2, weird: 1 })]
@@ -953,7 +953,7 @@ export const ADVERSARIES = [
         experiences: [['Display of Dominance', 3]],
         features: [
             { name: 'Fan Display', form: 'action', img: 'icons/commodities/materials/feather-colored-red.webp',
-              text: '<p><strong>Mark a Stress</strong> to spread his tail-fan. All PCs within Close range must succeed on a Presence Reaction Roll or be unable to move closer to the @Lookup[@name] until the end of their next turn.</p>',
+              text: '<p><strong>Mark a Stress</strong> to spread his tail-fan. All PCs within Close range must succeed on a Presence Reaction Roll or be unable to move closer to the @Lookup[@name] the next time they act.</p>',
               act: { type: 'save', save: 'presence', range: 'close', cost: { stress: 1 } } },
             { name: 'Call the Flock', form: 'action', img: 'icons/creatures/birds/birds-flock-fly-yellow.webp',
               text: '<p><strong>Spend a Fear</strong> to gobble for the flock. Spotlight the @Lookup[@name] and every Gobble Poult within Far range; each moves up to Close range and can make a standard attack.</p>',
@@ -994,7 +994,7 @@ export const ADVERSARIES = [
         experiences: [['Steady Pour', 3]],
         features: [
             { name: 'Scalding Spill', form: 'action', img: 'icons/commodities/materials/slime-thick-orange.webp',
-              text: '<p><strong>Mark a Stress</strong> to tip over the rim. All creatures in a line within Close range must succeed on an Agility Reaction Roll or take <strong>2d6+3</strong> magic damage and be slowed: they can\'t move farther than Very Close range on their next turn. Targets who succeed take half damage.</p>',
+              text: '<p><strong>Mark a Stress</strong> to tip over the rim. All creatures in a line within Close range must succeed on an Agility Reaction Roll or take <strong>2d6+3</strong> magic damage and be slowed: they can\'t move farther than Very Close range the next time they act. Targets who succeed take half damage.</p>',
               act: { type: 'save', save: 'agility', range: 'close', cost: { stress: 1 }, damage: '2d6+3', dtype: 'magical', half: true } },
             { name: 'Refill', form: 'action', img: 'icons/tools/cooking/bowl-steaming-brown.webp',
               text: '<p>While on a river of gravy, the @Lookup[@name] can <strong>mark a Stress</strong> to scoop up a refill and clear <strong>1</strong> HP.</p>',
@@ -1036,7 +1036,7 @@ export const ADVERSARIES = [
         features: [
             { std: 'relentless', n: 3 },
             { name: 'The Gobble', form: 'action', img: 'icons/magic/sonic/scream-wail-shout-teal.webp',
-              text: '<p><strong>Spend a Fear</strong> to let out a cavern-shaking gobble. All PCs within Far range must succeed on a Presence Reaction Roll or mark <strong>2</strong> Stress and be Vulnerable until the end of their next turn.</p>',
+              text: '<p><strong>Spend a Fear</strong> to let out a cavern-shaking gobble. All PCs within Far range must succeed on a Presence Reaction Roll or mark <strong>2</strong> Stress and be Vulnerable until they next act.</p>',
               act: { type: 'save', save: 'presence', range: 'far', cost: { fear: 1 }, status: 'vulnerable', resource: { stress: 2 } } },
             { name: 'Drumstick Stomp', form: 'action', img: 'icons/consumables/food/cooked-drumstick-turkey-brown.webp',
               text: '<p><strong>Mark a Stress</strong> to stomp the ground. All creatures within Very Close range must succeed on an Agility Reaction Roll or take <strong>3d10+3</strong> physical damage and be knocked prone (Vulnerable). Targets who succeed take half damage.</p>',

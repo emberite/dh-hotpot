@@ -283,3 +283,41 @@ export async function buildAdversaries({ pack: packId = PACK, only = null } = {}
     await pack.configure({ locked: true });
     return summary;
 }
+
+/**
+ * Update the wording of adversaries already in the compendium (feature texts, description, notes,
+ * motives) without rebuilding them, so every adversary keeps its ID.
+ * @param {{pack?: string, only?: string[]}} options  `only` limits it to the named adversaries
+ * @returns {Promise<string[]>} one line per changed adversary
+ */
+export async function refreshAdversaryText({ pack: packId = PACK, only = null } = {}) {
+    const pack = game.packs.get(packId);
+    if (!pack) throw new Error(`Missing pack ${packId}`);
+    await pack.configure({ locked: false });
+    const docs = await pack.getDocuments();
+    const changed = [];
+    for (const def of ADVERSARIES) {
+        if (only && !only.includes(def.name)) continue;
+        const actor = docs.find(a => a.name === def.name);
+        if (!actor) continue;
+        const itemUpdates = [];
+        for (const f of def.features) {
+            if (f.std) continue;
+            const item = actor.items.find(i => i.name === f.name);
+            if (item && item.system.description !== f.text) itemUpdates.push({ _id: item.id, 'system.description': f.text });
+        }
+        const actorUpdate = {};
+        const description = `<p>${def.description}</p>`;
+        const notes = harvestHTML(def.harvest);
+        if (actor.system.description !== description) actorUpdate['system.description'] = description;
+        if (actor.system.notes !== notes) actorUpdate['system.notes'] = notes;
+        if (actor.system.motivesAndTactics !== def.motives) actorUpdate['system.motivesAndTactics'] = def.motives;
+        if (itemUpdates.length) await actor.updateEmbeddedDocuments('Item', itemUpdates);
+        if (Object.keys(actorUpdate).length) await actor.update(actorUpdate);
+        if (itemUpdates.length || Object.keys(actorUpdate).length) {
+            changed.push(`${def.name}: ${itemUpdates.length} feature text(s)${Object.keys(actorUpdate).length ? ', ' + Object.keys(actorUpdate).join(', ') : ''}`);
+        }
+    }
+    await pack.configure({ locked: true });
+    return changed;
+}
