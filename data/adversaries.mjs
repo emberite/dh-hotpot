@@ -1046,5 +1046,124 @@ export const ADVERSARIES = [
             { std: 'terrifying' }
         ],
         harvest: [I('Great Gobbler Drumstick', { savory: 3, salty: 1 }), I('Gobbler Giblets', { bitter: 1, savory: 2 }), I('Lucky Wishbone', { sweet: 1, weird: 2 }, 'It must be prepared in a strange way.')]
+    },
+    /* ================================================================== */
+    /*  ROUND THREE: THANKSGIVING DESSERTS                                */
+    /* ================================================================== */
+    {
+        name: 'Whipped Cream Dollops',
+        tier: 1, type: 'minion', size: 'small',
+        img: 'icons/commodities/materials/slime-white.webp',
+        description: 'Fluffy white dollops of cream that wobble across the cave floor in little peaks, leaping for faces and bursting on contact.',
+        motives: 'Wobble, leap, splatter, smother',
+        difficulty: 10, hp: 1, stress: 1,
+        attack: { name: 'Creamy Slap', range: 'melee', bonus: -1, damage: '2' },
+        experiences: [['Light and Fluffy', 2]],
+        features: [
+            { std: 'minion', n: 3 },
+            { std: 'group' },
+            { name: 'Splat!', form: 'reaction', img: 'icons/commodities/materials/slime-white.webp',
+              text: '<p>When the @Lookup[@name] is defeated by a melee attack, it bursts in the attacker\'s face. The attacker must succeed on an Agility Reaction Roll or make their next action roll with disadvantage while they wipe off the cream.</p>',
+              act: { type: 'save', save: 'agility', range: 'melee' } }
+        ],
+        harvest: [I('Whipped Cream Puff', { sweet: 2 }, 'It\'s particularly tender.')]
+    },
+    {
+        name: 'Pumpkin Spice Sprite',
+        tier: 1, type: 'support', size: 'small',
+        img: 'icons/consumables/vegetable/squash-pumpkin-glow-orange.webp',
+        description: 'A tiny glowing pumpkin with leafy wings, trailing a warm haze of cinnamon, nutmeg and clove. Everyone around it suddenly feels very cozy, and very sneezy.',
+        motives: 'Spread the aroma, fire up allies, flit out of reach, make everything pumpkin',
+        difficulty: 10, thresholds: [5, 9], hp: 4, stress: 4,
+        attack: { name: 'Cinnamon Flick', range: 'far', bonus: 2, damage: '1d6+2', dtype: 'magical', img: 'icons/consumables/food/spice-anise-pod.webp' },
+        experiences: [['Seasonal Favorite', 3]],
+        features: [
+            { std: 'flying' },
+            { name: 'Cozy Aroma', form: 'action', img: 'icons/consumables/vegetable/squash-pumpkin-flat-orange.webp',
+              text: '<p><strong>Mark a Stress</strong>. All allies within Close range make their next attack with advantage.</p>',
+              act: { type: 'effect', range: 'close', cost: { stress: 1 } } },
+            { name: 'Spice Cloud', form: 'action', img: 'icons/consumables/food/salt-seasoning-spice-pink.webp',
+              text: '<p><strong>Mark a Stress</strong> to burst into a cloud of spice. All PCs within Very Close range must succeed on an Instinct Reaction Roll or mark a Stress as they cough and sneeze.</p>',
+              act: { type: 'save', save: 'instinct', range: 'veryClose', cost: { stress: 1 }, resource: { stress: 1 } } }
+        ],
+        harvest: [I('Pumpkin Spice', { sweet: 1, bitter: 1, weird: 1 }, 'It smells unbelievably good.')]
+    },
+    {
+        name: 'Candied Pecan Beetles',
+        tier: 2, type: 'horde', size: 'small',
+        img: 'icons/consumables/nuts/walnut-shelled-glowing-brown.webp',
+        description: 'A clicking swarm of beetles with glossy, caramel-glazed shells shaped like pecan halves. They leave sticky trails of hot caramel wherever they go.',
+        motives: 'Swarm, glaze, stick, nest in pie crust',
+        difficulty: 14, thresholds: [10, 20], hp: 5, stress: 3,
+        attack: { name: 'Sticky Mandibles', range: 'veryClose', bonus: 0, damage: '2d6+3' },
+        hordeDamage: '1d6+2', hordeHP: 2,
+        experiences: [['Glazed Over', 2]],
+        features: [
+            { name: 'Hot Caramel', form: 'reaction', img: 'icons/consumables/food/candy-taffy-yellow.webp',
+              text: '<p>When the @Lookup[@name] succeed on a standard attack, the target is stuck in hot caramel and can\'t move farther than Very Close range the next time they act.</p>' }
+        ],
+        harvest: [I('Candied Pecans', { sweet: 2, savory: 1 }, 'It\'s brittle.')]
+    },
+    {
+        name: 'Sweet Potato Casserole',
+        tier: 2, type: 'standard', size: 'medium',
+        img: 'icons/consumables/vegetable/root-potato-yam-orange.webp',
+        description: 'A heaving mound of orange mash crowned with a crust of golden, toasted marshmallows. When it gets angry, the marshmallows start to smoke.',
+        motives: 'Smother, ooze, toast, crust over',
+        difficulty: 14, thresholds: [9, 18], hp: 5, stress: 3,
+        attack: { name: 'Mashing Pseudopod', range: 'melee', bonus: 1, damage: '2d8+4' },
+        experiences: [['Comfort Food', 2]],
+        features: [
+            { name: 'Mash', form: 'action', img: 'icons/consumables/vegetable/root-carrot-yam-orange.webp',
+              text: '<p><strong>Mark a Stress</strong> to make an attack against a target within Melee range. On a success, the target is pulled into the mash: they take <strong>2d6+3</strong> physical damage and are Restrained until they pull free with a Strength Roll.</p>',
+              act: { type: 'attack', range: 'melee', cost: { stress: 1 }, damage: '2d6+3', status: 'restrained' } },
+            { name: 'Marshmallow Crust', form: 'reaction', img: 'icons/consumables/food/candy-pattie-pink-white.webp',
+              text: '<p>The first time the @Lookup[@name] takes Major or greater damage, its toasted topping bursts. All creatures within Very Close range must succeed on an Agility Reaction Roll or take <strong>2d8</strong> magic damage from molten marshmallow.</p>',
+              act: { type: 'save', save: 'agility', range: 'veryClose', damage: '2d8', dtype: 'magical' } }
+        ],
+        harvest: [I('Candied Yam', { sweet: 2, savory: 1 }), I('Toasted Marshmallow', { sweet: 2, bitter: 1 }, 'It\'s brightly colored.')]
+    },
+    {
+        name: 'Pumpkin Pie Sentinel',
+        tier: 2, type: 'bruiser', size: 'large',
+        img: 'icons/consumables/vegetable/squash-pumpkin-flat-orange.webp',
+        description: 'A towering pumpkin pie standing on its edge, its fluted crust rim hardened into armor and a crown of whipped cream on top. It guards the dessert caves and slices anyone who gets too close.',
+        motives: 'Guard the dessert table, slice, stand firm, never be eaten',
+        difficulty: 15, thresholds: [14, 28], hp: 7, stress: 4,
+        attack: { name: 'Crust Bash', range: 'melee', bonus: 2, damage: '2d10+3' },
+        experiences: [['Unbudging Guardian', 3]],
+        features: [
+            { name: 'Fluted Crust', form: 'passive', img: 'icons/consumables/grains/pastry-bread-brown.webp',
+              text: '<p>The @Lookup[@name] reduces all physical damage they take by <strong>2</strong>.</p>' },
+            { name: 'Cut a Slice', form: 'action', img: 'icons/tools/cooking/knife-chef-steel-black.webp',
+              text: '<p><strong>Mark a Stress</strong> to make an attack against a target within Very Close range. On a success, deal <strong>2d10+4</strong> physical damage and the target is Vulnerable until they next act.</p>',
+              act: { type: 'attack', range: 'veryClose', cost: { stress: 1 }, damage: '2d10+4', status: 'vulnerable' } },
+            { std: 'momentum' }
+        ],
+        harvest: [I('Pumpkin Pie Wedge', { sweet: 2, savory: 1 }), I('Fluted Crust', { salty: 1, sweet: 1 }, 'It comes apart in layers.')]
+    },
+    {
+        name: 'Lattice Wyrm',
+        tier: 3, type: 'solo', size: 'huge',
+        img: 'icons/consumables/fruit/apple-ripe-red.webp',
+        description: 'A coiling dragon whose scales are woven strips of golden lattice pastry. Scalding apple filling steams through the gaps, and its breath is a roar of cinnamon fire.',
+        motives: 'Coil, roast, guard its hoard of pies, bake intruders',
+        difficulty: 18, thresholds: [20, 35], hp: 10, stress: 6,
+        attack: { name: 'Crusted Fangs', range: 'veryClose', bonus: 5, damage: '3d10+2' },
+        experiences: [['Golden Brown', 3], ['Hoard of Pies', 3]],
+        features: [
+            { std: 'relentless', n: 3 },
+            { name: 'Cinnamon Breath', form: 'action', img: 'icons/magic/fire/beam-jet-stream-embers.webp',
+              text: '<p><strong>Spend a Fear</strong> to breathe cinnamon fire. All targets in front of the @Lookup[@name] within Close range must succeed on an Agility Reaction Roll or take <strong>3d10+4</strong> magic damage. Targets who succeed take half damage.</p>',
+              act: { type: 'save', save: 'agility', range: 'close', cost: { fear: 1 }, damage: '3d10+4', dtype: 'magical', half: true } },
+            { name: 'Hot Filling', form: 'reaction', img: 'icons/consumables/fruit/apple-ripe-red.webp',
+              text: '<p>When the @Lookup[@name] takes Severe damage, scalding apple filling bursts through the lattice. All creatures within Very Close range take <strong>2d8</strong> magic damage.</p>',
+              act: { type: 'damage', range: 'veryClose', damage: '2d8', dtype: 'magical' } },
+            { name: 'Flaky Scales', form: 'reaction', img: 'icons/consumables/grains/pastry-bread-brown.webp',
+              text: '<p>When the @Lookup[@name] is hit by a melee attack, you can <strong>mark a Stress</strong> to shed a shower of buttery flakes. The attacker must succeed on an Agility Reaction Roll or make their next attack with disadvantage.</p>',
+              act: { type: 'save', save: 'agility', range: 'melee', cost: { stress: 1 } } },
+            { std: 'momentum' }
+        ],
+        harvest: [I('Lattice Scale', { sweet: 1, salty: 1 }, 'It comes apart in layers.'), I('Spiced Apple Filling', { sweet: 2, sour: 1 }), I('Cinnamon Gland', { bitter: 1, weird: 2 }, 'It\'s emitting a colorful gas.')]
     }
 ];
