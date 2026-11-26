@@ -83,13 +83,13 @@ While the setting is on (the default):
 
 ### Compendiums
 
-- **Beast Feast Adversaries:** 58 food-themed adversaries across Tiers 1–4 and every adversary type. Cave beasts like the Glutton Ogre and the Stew Sea Leviathan, fast-food foes like a literal Chicken Nugget, Fryling Swarms and the Supersize Hydra, comfort-food creatures like Granny Gruel and the Mac and Cheese Colossus, and a Thanksgiving flock led by The Great Gobbler, with a dessert course from Whipped Cream Dollops to the apple-pie Lattice Wyrm. Each lists what it yields when harvested.
+- **Beast Feast Adversaries:** 60 food-themed adversaries across Tiers 1–4 and every adversary type. Cave beasts like the Glutton Ogre and the Stew Sea Leviathan, fast-food foes like a literal Chicken Nugget, Fryling Swarms and the Supersize Hydra, comfort-food creatures like Granny Gruel and the Mac and Cheese Colossus, and a Thanksgiving flock led by The Great Gobbler, with a dessert course from Whipped Cream Dollops to the apple-pie Lattice Wyrm, plus a Tier 4 Birthday Cake and its Frosted Cupcakes. Each lists what it yields when harvested.
 - **Beast Feast Maps:** an adventure that imports the campaign map as a scene. It has pins for Elmore, the Plover Caves, the labeled regions and the four depths, plus a journal linking each pin to the matching Core Rulebook section. The map image is loaded from the Core Rulebook module.
 
 | | | |
 |---|---|---|
 | ![Make a Feast on the party sheet](docs/img/party-sheet.webp) | ![The Hotpot compendiums with the Beast Feast cover](docs/img/compendiums.webp) | ![The Supersize Hydra adversary sheet](docs/img/adversary-sheet.webp) |
-| **Make a Feast** sits on the party sheet. | The Hotpot compendiums, with the Beast Feast cover. | One of the 58 adversaries: the Supersize Hydra. |
+| **Make a Feast** sits on the party sheet. | The Hotpot compendiums, with the Beast Feast cover. | One of the 60 adversaries: the Supersize Hydra. |
 
 ## Settings
 

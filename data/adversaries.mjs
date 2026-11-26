@@ -1165,5 +1165,52 @@ export const ADVERSARIES = [
             { std: 'momentum' }
         ],
         harvest: [I('Lattice Scale', { sweet: 1, salty: 1 }, 'It comes apart in layers.'), I('Spiced Apple Filling', { sweet: 2, sour: 1 }), I('Cinnamon Gland', { bitter: 1, weird: 2 }, 'It\'s emitting a colorful gas.')]
+    },
+    /* ================================================================== */
+    /*  BIRTHDAY PARTY                                                    */
+    /* ================================================================== */
+    {
+        name: 'Frosted Cupcakes',
+        tier: 4, type: 'minion', size: 'small',
+        img: 'icons/consumables/grains/muffin.webp',
+        description: 'Rows of pastel-frosted cupcakes, each topped with sprinkles and a single lit candle, hopping in perfect unison and singing slightly off-key.',
+        motives: 'Hop in formation, sing, swarm the guest of honor, spread sprinkles',
+        difficulty: 18, hp: 1, stress: 1,
+        attack: { name: 'Sprinkle Bite', range: 'melee', bonus: 3, damage: '11' },
+        experiences: [['Party Crashers', 3]],
+        features: [
+            { std: 'minion', n: 12 },
+            { std: 'group' },
+            { name: 'Candle Topper', form: 'reaction', img: 'icons/sundries/lights/candle-lit-yellow.webp',
+              text: '<p>When the @Lookup[@name] is defeated, its lit candle tumbles off. One creature within Very Close range must succeed on an Agility Reaction Roll or take <strong>8</strong> magic damage.</p>',
+              act: { type: 'save', save: 'agility', range: 'veryClose', damage: '8', dtype: 'magical' } }
+        ],
+        harvest: [I('Frosted Cupcake', { sweet: 2, salty: 1 }, 'It\'s brightly colored.')]
+    },
+    {
+        name: 'The Birthday Cake',
+        tier: 4, type: 'solo', size: 'huge',
+        img: 'icons/magic/light/light-candles-lit-white.webp',
+        description: 'A towering, many-tiered birthday cake with walls of buttercream, piped sugar roses and a forest of blazing candles. Every year it gets one tier taller, and every year someone has to try to eat it.',
+        motives: 'Be the center of attention, make a wish, smother in frosting, never be cut',
+        difficulty: 20, thresholds: [35, 68], hp: 11, stress: 8,
+        attack: { name: 'Frosted Slam', range: 'veryClose', bonus: 8, damage: '4d8+10' },
+        experiences: [['Center of Attention', 4], ['Another Year Older', 3]],
+        features: [
+            { std: 'relentless', n: 3 },
+            { name: 'Make a Wish', form: 'action', img: 'icons/magic/light/light-candles-lit-white.webp',
+              text: '<p><strong>Spend a Fear</strong> to make a wish. The @Lookup[@name] clears <strong>2</strong> HP, and <strong>1d4+2</strong> Frosted Cupcakes hop out of its tiers within Close range.</p>',
+              act: { type: 'healing', cost: { fear: 1 }, heal: '2' } },
+            { name: 'Candlefire', form: 'action', img: 'icons/sundries/lights/candles-lit-red-evil.webp',
+              text: '<p><strong>Mark a Stress</strong> as every candle flares at once. All targets in front of the @Lookup[@name] within Far range must succeed on an Agility Reaction Roll or take <strong>4d8+8</strong> magic damage. Targets who succeed take half damage.</p>',
+              act: { type: 'save', save: 'agility', range: 'far', cost: { stress: 1 }, damage: '4d8+8', dtype: 'magical', half: true } },
+            { name: 'Frosting Flood', form: 'action', img: 'icons/commodities/materials/slime-white.webp',
+              text: '<p><strong>Mark a Stress</strong> to pour buttercream down its tiers. All creatures within Close range must succeed on a Strength Reaction Roll or take <strong>3d10+6</strong> physical damage and be Restrained in hardening frosting until they break free with a Strength Roll.</p>',
+              act: { type: 'save', save: 'strength', range: 'close', cost: { stress: 1 }, damage: '3d10+6', status: 'restrained' } },
+            { name: 'Collapsing Tier', form: 'reaction', img: 'icons/magic/earth/barrier-stone-explosion-red.webp',
+              text: '<p>When the @Lookup[@name] takes Severe damage, a tier collapses onto everything below. All creatures within Very Close range must succeed on an Agility Reaction Roll or take <strong>4d6+6</strong> physical damage.</p>',
+              act: { type: 'save', save: 'agility', range: 'veryClose', damage: '4d6+6' } }
+        ],
+        harvest: [I('Birthday Cake Slice', { sweet: 3 }), I('Buttercream Frosting', { sweet: 2, salty: 1 }, 'It\'s particularly tender.'), I('Wishing Candle', { bitter: 1, weird: 2 }, 'It must be prepared in a strange way.')]
     }
 ];
