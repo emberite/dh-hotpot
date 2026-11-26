@@ -921,5 +921,130 @@ export const ADVERSARIES = [
         ],
         resist: 'physical',
         harvest: [I('Colossus Crust', { salty: 2, bitter: 1 }), I('Golden Goo', { salty: 2, savory: 2 })]
+    },
+    /* ================================================================== */
+    /*  ROUND THREE: THANKSGIVING                                         */
+    /* ================================================================== */
+    {
+        name: 'Gobble Poults',
+        tier: 1, type: 'minion', size: 'tiny',
+        img: 'icons/creatures/birds/birds-flock-fly-yellow.webp',
+        description: 'A scurrying gaggle of fluffy turkey chicks that follow the nearest tom everywhere, pecking at boots and bootlaces in a gobbling chorus.',
+        motives: 'Follow the tom, peck, scatter, swarm the slow',
+        difficulty: 10, hp: 1, stress: 1,
+        attack: { name: 'Pecking Beaks', range: 'melee', bonus: -1, damage: '2' },
+        experiences: [['Underfoot', 2]],
+        features: [
+            { std: 'minion', n: 3 },
+            { std: 'group' },
+            { name: 'Gobbling Chorus', form: 'passive', img: 'icons/magic/sonic/scream-wail-shout-teal.webp',
+              text: '<p>While three or more @Lookup[@name] are within Close range of each other, their noise drowns out speech. Spellcasting and Presence Rolls within Close range of them are made with disadvantage.</p>' }
+        ],
+        harvest: [I('Poult Wing', { savory: 1, sweet: 1 })]
+    },
+    {
+        name: 'Strutting Tom',
+        tier: 1, type: 'leader', size: 'medium',
+        img: 'icons/creatures/birds/chicken-hen-green.webp',
+        description: 'A proud wild tom turkey with an iridescent bronze tail-fan, a bright red wattle and a gobble that carries through the whole cavern. Where he struts, his poults follow.',
+        motives: 'Strut, display, rally the flock, defend the roost',
+        difficulty: 13, thresholds: [7, 13], hp: 6, stress: 3,
+        attack: { name: 'Spurred Kick', range: 'melee', bonus: 3, damage: '1d10+3' },
+        experiences: [['Display of Dominance', 3]],
+        features: [
+            { name: 'Fan Display', form: 'action', img: 'icons/commodities/materials/feather-colored-red.webp',
+              text: '<p><strong>Mark a Stress</strong> to spread his tail-fan. All PCs within Close range must succeed on a Presence Reaction Roll or be unable to move closer to the @Lookup[@name] until the end of their next turn.</p>',
+              act: { type: 'save', save: 'presence', range: 'close', cost: { stress: 1 } } },
+            { name: 'Call the Flock', form: 'action', img: 'icons/creatures/birds/birds-flock-fly-yellow.webp',
+              text: '<p><strong>Spend a Fear</strong> to gobble for the flock. Spotlight the @Lookup[@name] and every Gobble Poult within Far range; each moves up to Close range and can make a standard attack.</p>',
+              act: { type: 'effect', cost: { fear: 1 } } },
+            { std: 'momentum' }
+        ],
+        harvest: [I('Tom Turkey Drumstick', { savory: 2, salty: 1 }), I('Bronze Tail Feather', { weird: 1, bitter: 1 }, 'It\'s brightly colored.')]
+    },
+    {
+        name: 'Cranberry Bog Lurker',
+        tier: 2, type: 'skulk', size: 'medium',
+        img: 'icons/consumables/fruit/berries-hanging-red.webp',
+        description: 'A wobbling, ruby-red jelly that hides beneath the floating berries of a cranberry bog. It still has ridges on its side, as if it was poured out of a can.',
+        motives: 'Lurk, wobble, envelop, drag under the berries',
+        difficulty: 14, thresholds: [9, 17], hp: 4, stress: 4,
+        attack: { name: 'Tart Slap', range: 'melee', bonus: 3, damage: '2d8+2' },
+        experiences: [['Bog Camouflage', 3]],
+        features: [
+            { name: 'Under the Berries', form: 'passive', img: 'icons/consumables/fruit/berry-bunch-red-green.webp',
+              text: '<p>While submerged in a bog, the @Lookup[@name] is Hidden. The first time each scene they attack from hiding, the attack deals an extra <strong>1d8</strong> damage.</p>' },
+            { name: 'Jellied', form: 'action', img: 'icons/commodities/materials/slime-red.webp',
+              text: '<p><strong>Mark a Stress</strong> to make an attack against a target within Melee range. On a success, the target is wrapped in tart jelly: they take <strong>2d6+2</strong> physical damage and are Restrained until they break free with a Strength Roll.</p>',
+              act: { type: 'attack', range: 'melee', cost: { stress: 1 }, damage: '2d6+2', status: 'restrained' } },
+            { name: 'Wobble', form: 'reaction', img: 'icons/creatures/slimes/slime-bubble-green.webp',
+              text: '<p>When the @Lookup[@name] would take physical damage from a melee attack, they can <strong>mark a Stress</strong> to jiggle out of the way, halving the damage.</p>',
+              act: { type: 'effect', cost: { stress: 1 } } }
+        ],
+        harvest: [I('Cranberry Jelly', { sour: 2, sweet: 1 }, 'It\'s completely translucent.')]
+    },
+    {
+        name: 'Gravy Boat',
+        tier: 2, type: 'ranged', size: 'medium',
+        img: 'icons/environment/vehicles/boat-fishing-masted.webp',
+        description: 'A walking porcelain gravy boat the size of a rowing boat, sailing slow rivers of hot gravy and firing ladlefuls at anyone on the bank.',
+        motives: 'Sail the gravy, ladle, flood the banks, never run dry',
+        difficulty: 14, thresholds: [9, 17], hp: 5, stress: 4,
+        attack: { name: 'Ladle Shot', range: 'far', bonus: 2, damage: '2d8+3', img: 'icons/tools/cooking/soup-ladle.webp' },
+        experiences: [['Steady Pour', 3]],
+        features: [
+            { name: 'Scalding Spill', form: 'action', img: 'icons/commodities/materials/slime-thick-orange.webp',
+              text: '<p><strong>Mark a Stress</strong> to tip over the rim. All creatures in a line within Close range must succeed on an Agility Reaction Roll or take <strong>2d6+3</strong> magic damage and be slowed: they can\'t move farther than Very Close range on their next turn. Targets who succeed take half damage.</p>',
+              act: { type: 'save', save: 'agility', range: 'close', cost: { stress: 1 }, damage: '2d6+3', dtype: 'magical', half: true } },
+            { name: 'Refill', form: 'action', img: 'icons/tools/cooking/bowl-steaming-brown.webp',
+              text: '<p>While on a river of gravy, the @Lookup[@name] can <strong>mark a Stress</strong> to scoop up a refill and clear <strong>1</strong> HP.</p>',
+              act: { type: 'healing', cost: { stress: 1 }, heal: '1' } }
+        ],
+        harvest: [I('Boat of Gravy', { savory: 2, salty: 1 }), I('Porcelain Hull Shard', { salty: 1, weird: 1 }, 'It\'s brittle.')]
+    },
+    {
+        name: 'Cornucopia Maw',
+        tier: 3, type: 'support', size: 'large',
+        img: 'icons/commodities/bones/horn-carved-cornucopia-tan.webp',
+        description: 'A huge, curling horn of woven bark lying on its side, endlessly spilling gourds, grain and fruit. Deep inside the horn, something with teeth keeps the harvest coming.',
+        motives: 'Overflow, feed allies, bury foes in plenty, swallow the greedy',
+        difficulty: 17, thresholds: [18, 33], hp: 6, stress: 5,
+        attack: { name: 'Gourd Barrage', range: 'far', bonus: 3, damage: '3d6+5', img: 'icons/consumables/vegetable/squash-pumpkin-rough-orange.webp' },
+        experiences: [['Endless Harvest', 3]],
+        features: [
+            { name: 'Horn of Plenty', form: 'action', img: 'icons/consumables/vegetable/squash-pumpkin-flat-orange.webp',
+              text: '<p><strong>Mark a Stress</strong> to spill out a feast. All allies within Close range clear <strong>2</strong> HP.</p>',
+              act: { type: 'healing', range: 'close', cost: { stress: 1 }, heal: '2' } },
+            { name: 'Overflowing', form: 'action', img: 'icons/consumables/grains/sack-grain-open-white.webp',
+              text: '<p><strong>Spend a Fear</strong> to pour out an avalanche of gourds and grain. All creatures within Close range must succeed on a Strength Reaction Roll or take <strong>3d8+4</strong> physical damage and be buried (Restrained) until they dig themselves out.</p>',
+              act: { type: 'save', save: 'strength', range: 'close', cost: { fear: 1 }, damage: '3d8+4', status: 'restrained' } },
+            { name: 'Greedy Mouth', form: 'reaction', img: 'icons/creatures/abilities/mouth-teeth-tongue-purple.webp',
+              text: '<p>When a creature within Melee range takes an ingredient or item from the spill, the @Lookup[@name] bites. They take <strong>2d10</strong> physical damage.</p>',
+              act: { type: 'damage', damage: '2d10' } }
+        ],
+        harvest: [I('Harvest Gourd', { sweet: 2, savory: 1 }), I('Horn of Plenty Bark', { bitter: 2, weird: 1 }, 'It\'s leathery or cartilaginous.')]
+    },
+    {
+        name: 'The Great Gobbler',
+        tier: 3, type: 'solo', size: 'huge',
+        img: 'icons/consumables/food/cooked-drumstick-glazed-turkey-leg.webp',
+        description: 'A turkey the size of a barn, bronze-feathered and furious. Its gobble shakes dust from the cave ceiling, and its drumsticks could feed Elmore for a month, if anyone could bring it down.',
+        motives: 'Gobble, stomp, fan out, defend the flock, refuse to be dinner',
+        difficulty: 18, thresholds: [20, 35], hp: 10, stress: 6,
+        attack: { name: 'Hammering Beak', range: 'veryClose', bonus: 5, damage: '3d10+2' },
+        experiences: [['Bird of Legend', 3], ['Ruler of the Roost', 3]],
+        features: [
+            { std: 'relentless', n: 3 },
+            { name: 'The Gobble', form: 'action', img: 'icons/magic/sonic/scream-wail-shout-teal.webp',
+              text: '<p><strong>Spend a Fear</strong> to let out a cavern-shaking gobble. All PCs within Far range must succeed on a Presence Reaction Roll or mark <strong>2</strong> Stress and be Vulnerable until the end of their next turn.</p>',
+              act: { type: 'save', save: 'presence', range: 'far', cost: { fear: 1 }, status: 'vulnerable', resource: { stress: 2 } } },
+            { name: 'Drumstick Stomp', form: 'action', img: 'icons/consumables/food/cooked-drumstick-turkey-brown.webp',
+              text: '<p><strong>Mark a Stress</strong> to stomp the ground. All creatures within Very Close range must succeed on an Agility Reaction Roll or take <strong>3d10+3</strong> physical damage and be knocked prone (Vulnerable). Targets who succeed take half damage.</p>',
+              act: { type: 'save', save: 'agility', range: 'veryClose', cost: { stress: 1 }, damage: '3d10+3', half: true, status: 'vulnerable' } },
+            { name: 'Lucky Wishbone', form: 'reaction', img: 'icons/commodities/bones/bone-simple-white.webp',
+              text: '<p>Once per scene, when the @Lookup[@name] would take Severe damage, they make a wish: roll a d6. On a 4 or higher, they take Major damage instead.</p>' },
+            { std: 'terrifying' }
+        ],
+        harvest: [I('Great Gobbler Drumstick', { savory: 3, salty: 1 }), I('Gobbler Giblets', { bitter: 1, savory: 2 }), I('Lucky Wishbone', { sweet: 1, weird: 2 }, 'It must be prepared in a strange way.')]
     }
 ];
